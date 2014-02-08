@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="webproject" default="compass" basedir=".">
+
+ <property name="ruby.bin" value="C:\Ruby200-x64\bin" />
+
+ <condition property="done.setup">
+  <available file="./WebContent/config.rb" />
+ </condition>
+
+ <target name="setup-once" unless="done.setup">
+  <exec executable="${ruby.bin}/ruby" dir="WebContent">
+   <arg value="${ruby.bin}/compass" />
+   <arg value="create" />
+   <arg value="--sass-dir" />
+   <arg value="sass" />
+   <arg value="--css-dir" />
+   <arg value="css" />
+   <arg value="--javascripts-dir" />
+   <arg value="js" />
+   <arg value="--images-dir" />
+   <arg value="images" />
+  </exec>
+ </target>
+
+ <target name="compass">
+  <exec executable="${ruby.bin}/ruby" dir="WebContent">
+   <arg value="${ruby.bin}/compass" />
+   <arg value="compile" />
+  </exec>
+ </target>
+</project>
