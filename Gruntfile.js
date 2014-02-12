@@ -17,7 +17,6 @@ module.exports = function(grunt) {
                 options: {
                     basePath: 'WebContent',
                     config: 'WebContent/config.rb',
-                    load:['bower_components/foundation/scss']
                 }
             }
         },
