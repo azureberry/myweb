@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+// plugin
+// foundation
+@import "../../plugin/foundation/scss/app";
+
+// リセットCSS、フォントサイズ
+@import "reset";
+
+// ミックスイン、@extend、CSS3など
+@import "mixin";
