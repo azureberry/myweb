@@ -15,15 +15,15 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
-                    basePath: 'WebContent',
-                    config: 'WebContent/config.rb',
+                    basePath: 'src',
+                    config: 'src/config.rb',
                 }
             }
         },
         watch: {
             // Sassファイルが更新されたら、cmqとcsscombのタスクを実行します。
             sass: {
-                files: ['WebContent/sass/**/*.scss','WebContent/plugin/**/*.scss'],
+                files: ['src/**/*.scss'],
                 tasks: ['compass']//,
               //  tasks: ['compass', 'cmq', 'csscomb'],
     /*            options: {
