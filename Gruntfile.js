@@ -21,11 +21,10 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            // Sassファイルが更新されたら、cmqとcsscombのタスクを実行します。
+            // Sassファイルが更新されたら、タスクを実行します。
             sass: {
                 files: ['src/**/*.scss'],
                 tasks: ['compass']//,
-              //  tasks: ['compass', 'cmq', 'csscomb'],
     /*            options: {
                     //変更されたらブラウザを更新
                     livereload: true,
@@ -44,26 +43,6 @@ module.exports = function(grunt) {
                 }
             }
         },*/
-        // バラバラに記述されたメディアクエリをまとめることができます。
- /*       cmq:{
-            options: {
-                log: false
-            },
-            dev: {
-                files: {
-                    'css/': ['css/style.css']
-                }
-            }
-        },
-        // csscombでCSSプロパティを揃えます。
-        csscomb:{
-            dev:{
-                expand: true,
-                cwd: 'css/',
-                src: ['*.css'],
-                dest: 'css/'
-            }
-        }*/
     });
 
     // GruntFile.jsに記載されているパッケージを自動読み込み
