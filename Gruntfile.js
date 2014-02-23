@@ -1,39 +1,65 @@
 //'use strict';
 // livereload用の初期設定
-//var
- //   path = require('path'),
- //   lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;//,
-//    folderMount = function folderMount(connect, point) {
-//        return connect.static(path.resolve(point));
-//    };
+var
+    path = require('path'),
+    lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+    folderMount = function folderMount(connect, point) {
+        return connect.static(path.resolve(point));
+    };
 
 module.exports = function(grunt) {
     var pkg, taskName;
     pkg = grunt.file.readJSON('package.json');
     grunt.initConfig({
+        //ディレクトリ設定
+        dir :{
+            src : 'src',
+            dist : 'Webcontent',
+            test : '<%= dir.src %>/test',
+            doc : 'docs',
+            js : 'js',
+            css : 'css',
+            cssCompile : '<%= dir.src %>/<%= dir.css %>.compile'
+        },
         // SassとCompassをコンパイルします。
         compass: {
             dist: {
                 options: {
-                    basePath: 'src',
-                    config: 'src/config.rb',
+                    basePath: '<%= dir.src %>',
+                    config: '<%= dir.src %>/config.rb',
                 }
             }
         },
+        jade: {
+            compile: {
+                files:{
+                    'Webcontent/index.html': ['<%= dir.src %>/jade/index.jade']
+                }
+            }
+      },
         watch: {
             // Sassファイルが更新されたら、タスクを実行します。
             sass: {
-                files: ['src/**/*.scss'],
-                tasks: ['compass']//,
-    /*            options: {
+                files: ['<%= dir.src %>/**/*.scss',],
+                tasks: ['compass']/*,
+                options: {
+                    //変更されたらブラウザを更新
+                    livereload: true,
+                    nospawn: true
+                }*/
+            },
+            jade: {
+                files: ['<%= dir.src %>/**/*.jade',],
+                tasks: ['jade']/*,
+                options: {
                     //変更されたらブラウザを更新
                     livereload: true,
                     nospawn: true
                 }*/
             }
-        }//,
+        },
         // http://localhost:9001/で表示を確認することができます。
-/*        connect: {
+        connect: {
             livereload: {
                 options: {
                     port: 9001,
@@ -42,7 +68,7 @@ module.exports = function(grunt) {
                     }
                 }
             }
-        },*/
+        },
     });
 
     // GruntFile.jsに記載されているパッケージを自動読み込み
@@ -53,7 +79,7 @@ module.exports = function(grunt) {
     }
 
     //grunt.registerTask('default', ['connect', 'watch:sass']);
-    grunt.registerTask('default', ['watch:sass']);
+    grunt.registerTask('default', ['watch']);
 
     grunt.registerTask('eatwarnings', function() {
         grunt.warn = grunt.fail.warn = function(warning) {

@@ -1,0 +1,49 @@
+!!!
+html
+  head
+    meta(charset='UTF-8')
+    block title
+
+    block meta
+      include ../common/_head_meta
+    block style
+      include ../common/_head_style
+    block scripts
+      include ../common/_head_scripts
+
+
+  body
+
+    //Header Nav
+    div.row
+      div.large-3.columns
+        h1
+          include ../common/_header_title
+      div.large-9.columns
+        ul.inline-list.right
+          include ../common/_header_nav
+
+
+    div.row
+      //Main Content Section
+      div.large-9.push-3.columns
+        block maincontents
+
+      //Nav Sidebar
+      div.large-3.pull-9.columns
+        ul.side-nav
+          include ../common/_side_nav
+        include ../common/_side_ad
+
+
+    //Footer
+    footer.row
+      div.large-12.columns
+        hr
+        div.row
+          div.large-6.columns
+            include ../common/_footer_copy
+          div.large-6.columns
+            ul.inline-list.right
+              include ../common/_footer_nav
+
