@@ -31,12 +31,19 @@ module.exports = function(grunt) {
             }
         },
         jade: {
-            compile: {
-                files:{
-                    'Webcontent/index.html': ['<%= dir.src %>/jade/index.jade']
-                }
+            options:{
+                pretty: true,
+                //data: grunt.file.readJSON('package.json'),
+            },
+            source:{
+                pretty: true,
+                expand: true,
+                cwd: '<%= dir.src %>/jade',
+                src: ['**/!(_)*.jade'],
+                dest: '<%= dir.dist %>',
+                ext: '.html'
             }
-      },
+        },
         watch: {
             // Sassファイルが更新されたら、タスクを実行します。
             sass: {
