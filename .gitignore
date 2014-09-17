@@ -7,4 +7,6 @@
 /WebContent/*
 /src/plugin/*
 /src/sass/plugin/*
+/src/css/*
+/src/json/*
 *.log
