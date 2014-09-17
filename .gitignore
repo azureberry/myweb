@@ -4,4 +4,7 @@
 /node_modules/*
 *.sublime*
 /work/*
+/WebContent/*
+/src/plugin/*
+/src/sass/plugin/*
 *.log
