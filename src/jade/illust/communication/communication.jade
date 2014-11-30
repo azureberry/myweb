@@ -1,0 +1,19 @@
+extends ..\..\layout\_layout
+
+block vars
+  - var htmlroot = "../../"
+
+block prepend meta
+
+block title
+  title= "イラスト　交流"
+
+block maincontents
+  h3 イラスト
+    small  交流
+
+  h4 捧げもの
+  mixin illust_galleries_communication(illust_comunicationfrom_file,"from")
+
+  h4 いただき物
+  mixin illust_galleries_communication(illust_comunicationfor_file,"for")

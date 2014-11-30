@@ -1,0 +1,38 @@
+mixin script_list(contents)
+  each val in contents
+    script(src="#{htmlroot}lib/#{val.filename}")
+
+
+mixin illust_galleries(contents,g_id)
+  ul.gallery.clearfix
+    each val in contents
+      li
+        a.fancybox(href="img/illust/#{val.a_file}", rel="fancybox", title="#{val.comment}")
+          img(src="img/illust/s/#{val.a_file}", width="60", height="60", alt="#{val.img_alt}" )
+
+mixin illust_galleries_communication(contents,g_id)
+  ul.gallery.clearfix
+    each val in contents
+      li
+        a.fancybox(href="#{htmlroot}img/illust/communication/#{val.a_file}", rel="fancybox", title="#{val.comment}")
+          img(src="#{htmlroot}img/illust/communication/#{val.a_file}", width="60", height="60", alt="#{val.img_alt}" )
+
+
+mixin link_mybanners(num)
+  - for (var x = num; x >0; x--)
+    img(src="link/jumblejunk#{x}.gif", width="200", height="40", alt="JumbleJunk_バナ―#{x}")
+
+mixin link_collections(contents)
+  each val in contents
+    a(href="#{val.a_href}", title="#{val.title}")
+      if val.img_src==""
+        | #{val.title}
+      else
+        img(src="#{val.img_src}", width="#{val.img_width}", height="#{val.img_height}", alt="#{val.title}" )
+
+mixin history_list(year, contents)
+  h3 #{year}
+  div
+    ul.list
+      each val in contents
+        li #{val.history_day}  #{val.history_contents}

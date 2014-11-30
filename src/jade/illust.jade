@@ -1,0 +1,37 @@
+extends layout\_layout
+
+block prepend meta
+
+block title
+  title= "イラスト"
+
+block maincontents
+  h2 イラスト
+
+
+  h3 オリジナル
+  +illust_galleries(illust_original, "original")
+
+  h3 オリキャラ
+  +illust_galleries(illust_orichara,"original")
+
+  h3 版権
+  +illust_galleries(illust_copyright,"copy")
+
+  h3 ログ・ラクガキ
+  +illust_galleries(illust_log,"log")
+
+  h3 TOP絵
+  +illust_galleries(illust_top,"top")
+
+
+  h3 web漫画
+  h4 召喚士（仮）
+  ul.list
+    li
+      a(href="illust/webcomic/summoner/introduce.html", title="登場人物紹介") 登場人物紹介
+
+  h3 交流
+  a(href="illust/communication/communication.html") 交流
+
+

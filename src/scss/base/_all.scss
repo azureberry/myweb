@@ -1,11 +1,10 @@
 @charset "utf-8";
 
 // リセットCSS、フォントサイズ
-//@import "reset";
+@import 'reset';
 
 // plugin
-@import "imports";
+@import 'imports';
 
 // ミックスイン、@extend、CSS3など
-@import "mixin";
-
+@import 'mixin';

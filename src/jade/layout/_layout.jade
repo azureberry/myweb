@@ -1,26 +1,32 @@
-!!!
+doctype html
 html
   head
     meta(charset='UTF-8')
+
+    block vars
+      - var htmlroot = './'
+
     block title
 
     block meta
       include ../common/_head_meta
     block style
       include ../common/_head_style
-    block scripts
-      include ../common/_head_scripts
 
 
   body
+    include ../mixins/_all_mixin
 
     //Header Nav
-    div.row
-      div.large-3.columns
-        h1
-          include ../common/_header_title
-      div.large-9.columns
-        ul.inline-list.right
+    nav.top-bar(data-topbar)
+      ul.title-area
+        li.name
+          h1
+            include ../common/_header_title
+        li.toggle-topbar.menu-icon
+          a(href="#") Menu
+      section.top-bar-section
+        ul.right
           include ../common/_header_nav
 
 
@@ -47,3 +53,5 @@ html
             ul.inline-list.right
               include ../common/_footer_nav
 
+    block bottom_scripts
+      include ../common/_bottom_scripts

@@ -1,0 +1,20 @@
+extends layout\_layout
+
+block prepend meta
+
+block title
+  title= "更新履歴"
+
+block maincontents
+  h2 更新履歴
+
+  div.accordion_section
+    +history_list("2014年", history_2014)
+    +history_list("2013年", history_2013)
+    +history_list("2012年", history_2012)
+    +history_list("2011年", history_2011)
+    +history_list("2010年", history_2010)
+    +history_list("2009年", history_2009)
+    +history_list("2008年", history_2008)
+    +history_list("2007年", history_2007)
+    +history_list("2006年", history_2006)

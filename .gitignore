@@ -9,4 +9,7 @@
 /src/sass/plugin/*
 /src/css/*
 /src/json/*
+/src/jade/fragment/*
+/src/img/*
+/src/link/*
 *.log

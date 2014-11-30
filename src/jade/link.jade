@@ -1,0 +1,60 @@
+extends layout\_layout
+
+block prepend meta
+
+block title
+  title= "リンク"
+
+block maincontents
+  h2 リンク
+
+  h3 このサイトへのリンクについて
+  p
+    |このサイトへのリンクはフリーです。つまり、はるもはがすも自由。
+    br
+    |報告は任意です。が、していただけるとこっそり遊びに行かせていただきます。
+    br
+    |トップと直リンクバナー以外は構成が変更になる場合があるため、トップ（ http://sora9.web.fc2.com/ ）へのリンクをオススメします。
+
+  table
+    tr
+      td(width="130px") サイト名
+      td Jumble Junk
+    tr
+      td 管理人
+      td 颯来(そら)
+    tr
+      td URL
+      td http://sora9.web.fc2.com/
+    tr
+      td バナー
+      td http://sora9.web.fc2.com/link/banner.gif
+    tr
+      td 直リンクバナー<br>コピペ用
+      td
+        textarea(cols="50",rows="5",readonly)
+          a(href="http://sora9.web.fc2.com/", title="Jumble Junk")
+            img(src="http://sora9.web.fc2.com/link/banner.gif", width="200", height="40", alt="Jumble Junk")
+
+
+  div バナーは↓↓のをどうぞ。<br><br>
+    img(src="link/banner.gif", width="200", height="40", alt="JumbleJunk_バナ―")
+    |←直リンク用バナーはこれ(ときどき変わります)
+  div
+    |↓お持ち帰り用バナー↓<br>
+    +link_mybanners(link_mybunner_num)
+
+  h3 素敵サイト様
+  h4 創作イラスト
+  h5 相互
+  +link_collections(link_sogo)
+
+  h5 片道
+  +link_collections(link_oneway)
+
+  h4 ブログ・その他
+  +link_collections(link_blog)
+
+  h4 素材
+  +link_collections(link_materials)
+

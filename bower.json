@@ -1,6 +1,26 @@
 {
-  "name": "foundation-libsass-template",
+  "name": "myweb",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
-    "foundation": "zurb/bower-foundation"
+    "fancybox": "~2.1.5",
+    "foundation": "~5.4.7",
+    "jquery-mousewheel": "~3.1.12"
+  },
+  "overrides": {
+    "fancybox": {
+      "main": ["source/jquery.fancybox.pack.js","source/jquery.fancybox.css","source/*.gif","source/*.png","source/helpers/jquery.fancybox-thumbs.*"]
+    },
+    "modernizr": {
+      "main": ["modernizr.js"]
+    }
   }
 }
