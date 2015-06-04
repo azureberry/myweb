@@ -5,8 +5,8 @@ $(document).ready ->
   $('.fancybox').fancybox(
     helpers :
       title :
-      	type	: 'insite'
+        type : 'insite'
       thumbs :
-      	width	: 50,
-      	height	: 50
+        width : 50,
+        height : 50
   )
