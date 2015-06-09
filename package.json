@@ -13,6 +13,7 @@
   "author": "sora",
   "license": "ISC",
   "devDependencies": {
+    "asset-builder": "^1.1.0",
     "coffee-script": "^1.8.0",
     "gulp": "^3.8.10",
     "gulp-coffee": "^2.2.0",
@@ -20,6 +21,7 @@
     "gulp-concat": "^2.4.2",
     "gulp-convert": "^0.1.0",
     "gulp-data": "^1.0.2",
+    "gulp-filter": "^2.0.2",
     "gulp-header": "^1.2.2",
     "gulp-htmlhint": "0.0.9",
     "gulp-if": "^1.2.5",
@@ -39,8 +41,12 @@
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
     "gulp-watch": "^3.0.0",
+    "gulp-webpack": "^1.5.0",
     "jshint-stylish": "^1.0.0",
     "main-bower-files": "^2.4.0",
-    "run-sequence": "^1.0.2"
+    "node-libs-browser": "^0.5.2",
+    "run-sequence": "^1.0.2",
+    "webpack": "^1.9.10",
+    "wiredep": "^2.2.2"
   }
 }

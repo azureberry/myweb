@@ -2,6 +2,9 @@ gulp         = require 'gulp'
 $             = require('gulp-load-plugins')()
 bowerfiles  = require 'main-bower-files'
 #runSeq = require 'run-sequence'
+#manifest     = require('asset-builder')('./manifest.json')
+wiredep = require('wiredep').stream
+#webpack = require('webpack')
 
 #path
 $src = './src'
@@ -15,6 +18,7 @@ config =
                  scssSourceMap: '../../'+$src + '/scss'
                  jade: $src + '/jade/**/*.jade'
                  jadetask: $src + '/jade/**/!(_)*.jade'
+                 jadebase: $src + '/jade/'
                  json: $src + '/json'
                  jsondata: $src + '/json/'+configFileName+'.json'
                  yml: $src + '/json/**/*.yml'
@@ -56,6 +60,7 @@ gulp.task 'scss', ->
   gulp
     .src config.path.scss
     .pipe $.plumber()
+#    .pipe wiredep()
     .pipe $.scssLint()
     .pipe $.rubySass(compass : true)
     .pipe $.pleeease(
@@ -85,6 +90,7 @@ gulp.task 'jade', ->
     .src config.path.jadetask
     .pipe $.plumber()
     .pipe $.jade(
+              basedir: config.path.jadebase
               data: require(config.path.jsondata)
               pretty: true
       )
@@ -106,12 +112,70 @@ gulp.task 'link', ->
 #    .pipe $.plumber()
     .pipe gulp.dest config.outpath.link
 
-gulp.task 'bower', ->
-  gulp.src bowerfiles()
-#    .pipe $.if '*.js', $.concat('vender.js')
-    .pipe $.if '*.js', $.uglify(preserveComments: 'some')
-    .pipe $.if '*.css', $.concat('vender.css')
+
+gulp.task "bower", ->
+  #bowerパッケージのパス取得
+  files = bowerfiles
+    paths:
+      bowerJson: "bower.json"
+      bowerDirectory: "bower_components"
+
+  #bowerパッケージのパスをbower_components/ からのパスに変更
+  files = files.map (file)->
+    return require("path").relative __dirname, file
+  console.log "targets: ", files
+
+  #bowerパッケージを種類ごとに結合圧縮して各フォルダに格納
+  #各ファイル中にパスが記載されている場合は位置関係が崩れる可能性がある
+  cssFilter = $.filter "**/*.css"
+  jsFilter =  $.filter "**/*.js"
+  imgFilter = $.filter ["**/*.gif", "**/*.png"]
+  gulp
+    .src files
+    .pipe $.plumber()
+    #cssファイルの場合
+    .pipe cssFilter
+    .pipe $.concat "vender.min.css"
+    .pipe $.minifyCss()
     .pipe gulp.dest config.outpath.lib
+    .pipe cssFilter.restore()
+    #jsファイルの場合
+   .pipe jsFilter
+   .pipe $.concat "vender.min.js"
+   .pipe $.uglify
+     preserveComments: "some"
+   .pipe gulp.dest config.outpath.lib
+   .pipe jsFilter.restore()
+    #画像ファイルの場合
+    .pipe imgFilter
+    .pipe gulp.dest config.outpath.lib
+    .pipe imgFilter.restore()
+    #その他ファイル
+    .pipe gulp.dest config.outpath.lib
+    return
+
+###
+gulp.task "webpack", (callback)->
+  webpack('./webpack.config.js',
+    (err, stats) ->
+      if(err)
+        throw new gutil.PluginError("webpack", err);
+      gutil.log("[webpack]", stats.toString({}));
+      callback();
+    );
+###
+
+###
+gulp.task "webpack", ->
+  webpack require('./webpack.config.js')
+###
+
+gulp.task "wiredep", ->
+  gulp
+    .src config.path.scss
+    .pipe wiredep()
+    .pipe gulp.dest $src + '/scss/'
+
 
 
 gulp.task 'watch', ->
