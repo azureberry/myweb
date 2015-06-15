@@ -6,6 +6,16 @@ block prepend meta
 block title
   title= "Jumble Junk"
 
+block breadcrumb
+
+//block sidenav
+
+block sidenav_contents
+  +submenuitem([
+              "最近の更新",
+              "サイトマップ",
+              "登録検索・ランキングサイト"])
+
 block maincontents
   h2 Jumble Junk
 
@@ -26,11 +36,11 @@ block maincontents
 
   include contents\_history_mini
 
-  h3 サイトマップ
+  h3#submenu1 サイトマップ
   include contents\_sitemap
 
 
-  h3 登録検索・ランキングサイト
+  h3#submenu2 登録検索・ランキングサイト
   p
     include fragment\_ranking
 

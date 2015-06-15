@@ -9,8 +9,17 @@ block prepend meta
 block title
   title= "召喚士（仮）　登場人物紹介"
 
+block append breadcrumb
+  li: a(href ="#{htmlroot}illust.html") イラスト
+  li.active 召喚士（仮）　登場人物紹介
+
+block sidenav_contents
+  +submenuitem([
+              "登場人物紹介"])
+
+
 block maincontents
-  h2 召喚士（仮）
+  h2#submenu0 召喚士（仮）
     small  登場人物紹介
 
 

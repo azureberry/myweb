@@ -5,10 +5,16 @@ block prepend meta
 block title
   title= "リンク"
 
+block append breadcrumb
+  li.active リンク
+
+block sidenav_contents
+  +submenuitem(["このサイトへのリンクについて", "素敵サイト様"])
+
 block maincontents
   h2 リンク
 
-  h3 このサイトへのリンクについて
+  h3#submenu0 このサイトへのリンクについて
   p
     |このサイトへのリンクはフリーです。つまり、はるもはがすも自由。
     br
@@ -44,7 +50,7 @@ block maincontents
     |↓お持ち帰り用バナー↓<br>
     +link_mybanners(link_mybunner_num)
 
-  h3 素敵サイト様
+  h3#submenu1 素敵サイト様
   h4 創作イラスト
   h5 相互
   +link_collections(link_sogo)

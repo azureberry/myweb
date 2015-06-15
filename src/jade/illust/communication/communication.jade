@@ -8,6 +8,15 @@ block prepend meta
 block title
   title= "イラスト　交流"
 
+block append breadcrumb
+  li: a(href ="#{htmlroot}illust.html") イラスト
+  li.active 交流
+
+block sidenav_contents
+  +submenuitem([
+              "捧げもの",
+              "いただき物"])
+
 block maincontents
   h3 イラスト
     small  交流

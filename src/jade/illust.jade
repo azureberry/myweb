@@ -5,33 +5,46 @@ block prepend meta
 block title
   title= "イラスト"
 
+block append breadcrumb
+  li.active イラスト
+
+block sidenav_contents
+  +submenuitem([
+              "オリジナル",
+              "オリキャラ",
+              "版権",
+              "ログ・ラクガキ",
+              "TOP絵",
+              "web漫画",
+              "交流"])
+
 block maincontents
   h2 イラスト
 
 
-  h3 オリジナル
+  h3#submenu0 オリジナル
   +illust_galleries(illust_original, "original")
 
-  h3 オリキャラ
+  h3#submenu1 オリキャラ
   +illust_galleries(illust_orichara,"original")
 
-  h3 版権
+  h3#submenu2 版権
   +illust_galleries(illust_copyright,"copy")
 
-  h3 ログ・ラクガキ
+  h3#submenu3 ログ・ラクガキ
   +illust_galleries(illust_log,"log")
 
-  h3 TOP絵
+  h3#submenu4 TOP絵
   +illust_galleries(illust_top,"top")
 
 
-  h3 web漫画
+  h3#submenu5 web漫画
   h4 召喚士（仮）
   ul.list
     li
       a(href="illust/webcomic/summoner/introduce.html", title="登場人物紹介") 登場人物紹介
 
-  h3 交流
+  h3#submenu6 交流
   a(href="illust/communication/communication.html") 交流
 
 

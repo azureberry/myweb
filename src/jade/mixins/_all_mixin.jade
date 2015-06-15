@@ -1,3 +1,9 @@
+mixin submenuitem(contents)
+  - var x = 0
+  each val in contents
+    li: a(href="#submenu#{x}") #{val}
+    - x++
+
 
 mixin illust_galleries(contents,g_id)
   ul.gallery.clearfix
@@ -26,8 +32,8 @@ mixin link_collections(contents)
       else
         img(src="#{val.img_src}", width="#{val.img_width}", height="#{val.img_height}", alt="#{val.title}" )
 
-mixin history_list(year, contents)
-  h3 #{year}
+mixin history_list(year, contents, num)
+  h3(id="submenu#{num}") #{year}
   div
     ul.list
       each val in contents

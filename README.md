@@ -7,7 +7,7 @@ myweb
 You'll need to have the following items installed before continuing.
 
   * [Ruby](https://www.ruby-lang.org/ja/)
-  * [gem] `gem update --system`
+  * gem `gem update --system`
   * [Sass](http://sass-lang.com/) `gem install sass`
   * [Compass](http://compass-style.org/) `gem install compass`
 

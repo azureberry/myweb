@@ -5,6 +5,8 @@ bowerfiles  = require 'main-bower-files'
 #manifest     = require('asset-builder')('./manifest.json')
 wiredep = require('wiredep').stream
 #webpack = require('webpack')
+del = require 'del'
+browserSync = require 'browser-sync'
 
 #path
 $src = './src'
@@ -18,7 +20,7 @@ config =
                  scssSourceMap: '../../'+$src + '/scss'
                  jade: $src + '/jade/**/*.jade'
                  jadetask: $src + '/jade/**/!(_)*.jade'
-                 jadebase: $src + '/jade/'
+#                 jadebase: $src + '/jade/'
                  json: $src + '/json'
                  jsondata: $src + '/json/'+configFileName+'.json'
                  yml: $src + '/json/**/*.yml'
@@ -31,6 +33,7 @@ config =
                 img: $WebContent + '/img'
                 link: $WebContent + '/link'
                 lib: $WebContent + '/lib'
+                libfont: $WebContent + '/lib/fonts'
 
 AUTOPREFIXER_BROWSERS = [
       'ie >= 10',
@@ -40,13 +43,16 @@ AUTOPREFIXER_BROWSERS = [
       'opera >= 23',
 ];
 
+ERROR_HANDLER = {
+  errorHandler: $.notify.onError('<%= error.message %>')
+}
 
 isRelease = $.util.env.release?
 
 gulp.task 'js', ->
   gulp
     .src config.path.js
-    .pipe $.plumber()
+    .pipe $.plumber(ERROR_HANDLER)
     .pipe $.coffeelint()
     .pipe $.coffeelint.reporter()
     .pipe $.coffee()
@@ -54,12 +60,13 @@ gulp.task 'js', ->
 #    .pipe $.jshint.reporter 'jshint-stylish'
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
+    .pipe browserSync.reload()
 
 
 gulp.task 'scss', ->
   gulp
     .src config.path.scss
-    .pipe $.plumber()
+    .pipe $.plumber(ERROR_HANDLER)
 #    .pipe wiredep()
     .pipe $.scssLint()
     .pipe $.rubySass(compass : true)
@@ -69,6 +76,7 @@ gulp.task 'scss', ->
       )
     .pipe $.if isRelease, $.minifyCss()
     .pipe gulp.dest config.outpath.css
+    .pipe browserSync.reload()
 
 gulp.task 'json', ->
   gulp
@@ -88,9 +96,9 @@ gulp.task 'yml', ->
 gulp.task 'jade', ->
   gulp
     .src config.path.jadetask
-    .pipe $.plumber()
+    .pipe $.plumber(ERROR_HANDLER)
     .pipe $.jade(
-              basedir: config.path.jadebase
+#              basedir: config.path.jadebase
               data: require(config.path.jsondata)
               pretty: true
       )
@@ -99,6 +107,7 @@ gulp.task 'jade', ->
     .pipe gulp.dest config.outpath.html
     .pipe $.if isRelease, $.sitemap(siteUrl: mySiteUrl)
     .pipe $.if isRelease, gulp.dest config.outpath.html
+    .pipe browserSync.reload()
 
 gulp.task 'img', ->
   gulp
@@ -112,8 +121,16 @@ gulp.task 'link', ->
 #    .pipe $.plumber()
     .pipe gulp.dest config.outpath.link
 
+gulp.task 'browser', ->
+  browserSync
+    server:
+      baseDir: $WebContent
 
-gulp.task "bower", ->
+
+gulp.task "lib-clean", (cb) ->
+  del([config.outpath.lib], cb)
+
+gulp.task "bower", ['lib-clean'],->
   #bowerパッケージのパス取得
   files = bowerfiles
     paths:
@@ -130,9 +147,17 @@ gulp.task "bower", ->
   cssFilter = $.filter "**/*.css"
   jsFilter =  $.filter "**/*.js"
   imgFilter = $.filter ["**/*.gif", "**/*.png"]
+  fontFilter = $.filter [
+                               "**/*.otf"
+                               "**/*.eot"
+                               "**/*.svg"
+                               "**/*.ttf"
+                               "**/*.woff"
+                               "**/*.woff2"
+                             ]
   gulp
     .src files
-    .pipe $.plumber()
+    .pipe $.plumber(ERROR_HANDLER)
     #cssファイルの場合
     .pipe cssFilter
     .pipe $.concat "vender.min.css"
@@ -143,15 +168,19 @@ gulp.task "bower", ->
    .pipe jsFilter
    .pipe $.concat "vender.min.js"
    .pipe $.uglify
-     preserveComments: "some"
+       preserveComments: "some"
    .pipe gulp.dest config.outpath.lib
    .pipe jsFilter.restore()
     #画像ファイルの場合
     .pipe imgFilter
     .pipe gulp.dest config.outpath.lib
     .pipe imgFilter.restore()
+    #フォントファイル
+    .pipe fontFilter
+    .pipe gulp.dest config.outpath.libfont
+    .pipe fontFilter.restore()
     #その他ファイル
-    .pipe gulp.dest config.outpath.lib
+#    .pipe gulp.dest config.outpath.lib
     return
 
 ###
@@ -196,7 +225,7 @@ gulp.task 'json2yml', ->
    .pipe gulp.dest $src + '/json'
 
 
-gulp.task 'default', ['watch']
+gulp.task 'default', ['browser', 'watch']
 gulp.task 'build', [
   'bower',
   'js',

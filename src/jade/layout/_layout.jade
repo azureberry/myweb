@@ -14,44 +14,59 @@ html
       include ../common/_head_style
 
 
-  body
+  body(data-spy="scroll", data-target=".submenulist", data-offset="85")
     include ../mixins/_all_mixin
 
-    //Header Nav
-    nav.top-bar(data-topbar)
-      ul.title-area
-        li.name
-          h1
-            include ../common/_header_title
-        li.toggle-topbar.menu-icon
-          a(href="#") Menu
-      section.top-bar-section
-        ul.right
-          include ../common/_header_nav
+    div.container
+
+      //Header Nav
+      div.row
+        nav.navbar.navbar-default.navbar-fixed-top
+          div.navbar-header
+            button.navbar-toggle(data-toggle="collapse" data-target="#collapse-target")
+                      span.sr-only Toggle navigation
+                      span.icon-bar
+                      span.icon-bar
+                      span.icon-bar
+
+            a.navbar-brand
+              include ../common/_header_title
+
+          div.collapse.navbar-collapse#collapse-target
+            ul.nav.navbar-nav
+              include ../common/_header_nav
+
+      div.row(style="padding:70px 0 0 0")
+        //Nav Sidebar
+        div.col-md-3
+          div.side-nav(data-spy="affix",data-offset-top="0", data-offset-bottom="50")
+            div.panel.panel-default.text-center
+              include ../common/_side_ad
+
+            block sidenav
+              div.panel.panel-default
+                div.panel-heading submenu
+                div.submenulist
+                  ul.nav.nav-pills.nav-stacked
+                    block sidenav_contents
 
 
-    div.row
-      //Main Content Section
-      div.large-9.push-3.columns
-        block maincontents
+        //Main Content Section
+        div.col-md-9
+          ul.breadcrumb
+            block breadcrumb
+                li: a(href ="#{htmlroot}index.html") Home
 
-      //Nav Sidebar
-      div.large-3.pull-9.columns
-        ul.side-nav
-          include ../common/_side_nav
-        include ../common/_side_ad
+          block maincontents
 
+      //Footer
+      footer.row
+        div
+          hr
+          include ../common/_footer_copy
 
-    //Footer
-    footer.row
-      div.large-12.columns
-        hr
-        div.row
-          div.large-6.columns
-            include ../common/_footer_copy
-          div.large-6.columns
-            ul.inline-list.right
-              include ../common/_footer_nav
+      include ../common/_goto_top
+
 
     block bottom_scripts
       include ../common/_bottom_scripts
