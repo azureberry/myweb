@@ -4,8 +4,6 @@
 /node_modules/*
 /work/*
 /WebContent/*
-/src/json/*
-/src/jade/fragment/*
 /src/img/*
 /src/link/*
 *.log

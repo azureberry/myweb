@@ -13,7 +13,6 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.4",
     "bootstrap": "~3.3.4",
-    "foundation": "~5.4.7",
     "jquery-mousewheel": "~3.1.12",
     "fontawesome": "~4.3.0",
     "fancybox": "~2.1.5"
@@ -28,15 +27,7 @@
         "source/helpers/jquery.fancybox-thumbs.*"
       ]
     },
-    "modernizr": {
-      "main": [
-        "modernizr.js"
-      ]
-    },
     "bootstrap": {
-      "ignore": true
-    },
-    "foundation": {
       "ignore": true
     },
     "fontawesome": {
