@@ -6,7 +6,7 @@ mixin submenuitem(contents)
 
 
 mixin illust_galleries(contents,g_id, imgfolder)
-  - if (imgfolder === undefined)
+  - if (typeof imgfolder === "undefined")
     - imgfolder = ""
   ul.gallery.clearfix
     each val in contents
