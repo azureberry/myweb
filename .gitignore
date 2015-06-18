@@ -2,7 +2,6 @@
 *.DS_Store
 /bower_components/*
 /node_modules/*
-/work/*
 /WebContent/*
 /src/json/*
 /src/jade/fragment/*

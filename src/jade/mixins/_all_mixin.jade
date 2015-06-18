@@ -5,19 +5,14 @@ mixin submenuitem(contents)
     - x++
 
 
-mixin illust_galleries(contents,g_id)
+mixin illust_galleries(contents,g_id, imgfolder)
+  - if (imgfolder === undefined)
+    - imgfolder = ""
   ul.gallery.clearfix
     each val in contents
       li
-        a.fancybox(href="img/illust/#{val.a_file}", rel="fancybox", title="#{val.comment}")
-          img(src="img/illust/s/#{val.a_file}", width="60", height="60", alt="#{val.img_alt}" )
-
-mixin illust_galleries_communication(contents,g_id)
-  ul.gallery.clearfix
-    each val in contents
-      li
-        a.fancybox(href="#{htmlroot}img/illust/communication/#{val.a_file}", rel="fancybox", title="#{val.comment}")
-          img(src="#{htmlroot}img/illust/communication/#{val.a_file}", width="60", height="60", alt="#{val.img_alt}" )
+        a.fancybox(href="#{htmlroot}img/illust/#{imgfolder}#{val.a_file}", rel="fancybox", title="#{val.comment}")
+          img(src="#{htmlroot}img/illust/#{imgfolder}#{val.a_file}", width="60", height="60", alt="#{val.img_alt}" )
 
 
 mixin link_mybanners(num)

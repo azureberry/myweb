@@ -9,18 +9,15 @@ block append breadcrumb
   li.active 更新履歴
 
 block sidenav_contents
-  +submenuitem(["2014年", "2013年", "2012年", "2011年", "2010年", "2009年", "2008年", "2007年", "2006年"])
+  -var year_title_list=[]
+  - for (var x = history_end; x >=history_start; x--)
+      - year_title_list.push(x+"年");
+  +submenuitem(year_title_list)
 
 block maincontents
   h2 更新履歴
 
-  div.accordion_section
-    +history_list("2014年", history_2014, 0)
-    +history_list("2013年", history_2013, 1)
-    +history_list("2012年", history_2012, 2)
-    +history_list("2011年", history_2011, 3)
-    +history_list("2010年", history_2010, 4)
-    +history_list("2009年", history_2009, 5)
-    +history_list("2008年", history_2008, 6)
-    +history_list("2007年", history_2007, 7)
-    +history_list("2006年", history_2006, 8)
+  div
+    - var i = 0;
+    - for (var x = history_end; x >=history_start; x--)
+      +history_list(x+"年", history[x], i++)

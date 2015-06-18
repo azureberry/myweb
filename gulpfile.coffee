@@ -1,7 +1,7 @@
 gulp         = require 'gulp'
 $             = require('gulp-load-plugins')()
 bowerfiles  = require 'main-bower-files'
-#runSeq = require 'run-sequence'
+runSequence = require 'run-sequence'
 #manifest     = require('asset-builder')('./manifest.json')
 wiredep = require('wiredep').stream
 #webpack = require('webpack')
@@ -60,8 +60,6 @@ gulp.task 'js', ->
 #    .pipe $.jshint.reporter 'jshint-stylish'
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
-    .pipe browserSync.reload()
-
 
 gulp.task 'scss', ->
   gulp
@@ -76,7 +74,6 @@ gulp.task 'scss', ->
       )
     .pipe $.if isRelease, $.minifyCss()
     .pipe gulp.dest config.outpath.css
-    .pipe browserSync.reload()
 
 gulp.task 'json', ->
   gulp
@@ -87,6 +84,7 @@ gulp.task 'json', ->
 gulp.task 'yml', ->
   gulp
     .src config.path.yml
+    .pipe $.plumber(ERROR_HANDLER)
     .pipe $.concat(configFileName+'.yml')
     .pipe $.convert(
               from: 'yml',
@@ -107,7 +105,6 @@ gulp.task 'jade', ->
     .pipe gulp.dest config.outpath.html
     .pipe $.if isRelease, $.sitemap(siteUrl: mySiteUrl)
     .pipe $.if isRelease, gulp.dest config.outpath.html
-    .pipe browserSync.reload()
 
 gulp.task 'img', ->
   gulp
@@ -122,10 +119,12 @@ gulp.task 'link', ->
     .pipe gulp.dest config.outpath.link
 
 gulp.task 'browser', ->
-  browserSync
+  browserSync.init
     server:
       baseDir: $WebContent
 
+gulp.task 'brower-reload', ->
+  browserSync.reload()
 
 gulp.task "lib-clean", (cb) ->
   del([config.outpath.lib], cb)
@@ -194,18 +193,6 @@ gulp.task "wiredep", ->
     .pipe wiredep()
     .pipe gulp.dest $src + '/scss/'
 
-
-
-gulp.task 'watch', ->
-  $.watch config.path.js, ->gulp.start ['js']
-  $.watch config.path.scss, ->gulp.start ['scss']
-  $.watch [config.path.yml], ->gulp.start ['yml']
-#  $.watch [config.path.json], ->gulp.start ['json','jade']
-  $.watch [config.path.jade, config.path.jsondata], ->gulp.start ['jade']
-  $.watch config.path.img, ->gulp.start ['img']
-  $.watch config.path.link, ->gulp.start ['link']
-
-
 gulp.task 'json2yml', ->
   gulp.src config.path.jsondata
    .pipe $.convert(
@@ -213,15 +200,24 @@ gulp.task 'json2yml', ->
       to: 'yml')
    .pipe gulp.dest $src + '/json'
 
+gulp.task 'watch', ->
+  $.watch config.path.js, ->gulp.start ['js','brower-reload']
+  $.watch config.path.scss, ->gulp.start ['scss','brower-reload']
+  $.watch [config.path.yml], ->gulp.start ['yml']
+#  $.watch [config.path.json], ->gulp.start ['json','jade']
+  $.watch [config.path.jade, config.path.jsondata], ->gulp.start ['jade','brower-reload']
+  $.watch config.path.img, ->gulp.start ['img','brower-reload']
+  $.watch config.path.link, ->gulp.start ['link','brower-reload']
+
 
 gulp.task 'default', ['browser', 'watch']
-gulp.task 'build', [
+gulp.task 'build', -> runSequence(
   'bower',
-  'js',
+  ['js',
   'scss',
 #  'json',
-  'yml',
+  'yml'],
   'jade',
-  'img',
-  'link',
-]
+  ['img',
+  'link'],
+)
