@@ -22,34 +22,30 @@ block maincontents
 
 
   h3#submenu0 名前
-  p 颯来(そら)<br>漢字難しいので呼ぶ時は「そら」で大丈夫です＾＾<br>ちなみに１つめ漢字は「さっそう（颯爽）」の初めです
+  div !{myname}
 
   h3#submenu1 性質
-  p テンションと更新頻度に波がある。<br>人と違う時期にブームの頂点が来る時があるマイペースさん。<br>趣味は広く浅く？<br><br>猫など、もふもふ好き<br>月など、神秘的なモノ好き。<br>透明でキラキラしたモノ好き。<br>人外キャラ・ミニキャラ好き。
+  div !{myPersonality}
 
   h3#submenu2 好きな漫画・小説
-  .lineuplayout もやしもん /鋼の錬金術師 /ハンター×ハンター /聖☆おにいさん /キノの旅 /×××HOLiC /School Rumble /破天荒遊戯 /こどものおもちゃ /君と僕。 /蟲師 /LIAR GAME /
+  div !{mycomic}
 
+  div.panel.panel-default
+    div.panel-heading その他所有コミック一覧
+    div.panel-body
+      include fragment\_about_comics
 
-  h4 その他所有コミック一覧
-  .lineuplayout
-    include fragment\_about_comics
-    <br>コミック感想をブログに載せてます<br>
-
-    a(href="http://sorajumjun.blog.shinobi.jp/Entry/97/") 目次
-
-    a(href="http://sorajumjun.blog.shinobi.jp/Category/13/") カテゴリー
 
   h3#submenu3 好きなゲーム
-  .lineuplayout 零～紅い蝶～ /LocoRoco2 /聖剣伝説 レジェンド オブ マナ /塊魂 /がんばれゴエモン ネオ桃山幕府のおどり /ぷよぷよ /ICO /FF9 /
+  div !{mygame}
+
+  div.panel.panel-default
+    div.panel-heading その他所有ゲーム一覧
+    div.panel-body
+      include fragment\_about_games
 
 
-  h4#submenu4 その他所有ゲーム一覧
-  .lineuplayout
-    include fragment\_about_games
-
-
-  h3 好きな音楽
-  p 天野月子 / 小松未歩 / Ｓｏｕｎｄ　Ｈｏｒｉｚｏｎ<br>ゲーム音楽（ゴエモン・聖剣伝説LOMなど） / アニメサントラ
+  h3#submenu4 好きな音楽
+  div !{mymusic}
 
 
