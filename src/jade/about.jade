@@ -28,21 +28,23 @@ block maincontents
   div !{myPersonality}
 
   h3#submenu2 好きな漫画・小説
-  div !{mycomic}
+  div.row
+    div.col-md-6 !{mycomic}
 
-  div.panel.panel-default
-    div.panel-heading その他所有コミック一覧
-    div.panel-body
-      include fragment\_about_comics
+    div.col-md-6.panel.panel-default
+      div.panel-heading その他所有コミック一覧
+      div.panel-body
+        include fragment\_about_comics
 
 
   h3#submenu3 好きなゲーム
-  div !{mygame}
+  div.row
+    div.col-md-6 !{mygame}
 
-  div.panel.panel-default
-    div.panel-heading その他所有ゲーム一覧
-    div.panel-body
-      include fragment\_about_games
+    div.col-md-6.panel.panel-default
+      div.panel-heading その他所有ゲーム一覧
+      div.panel-body
+        include fragment\_about_games
 
 
   h3#submenu4 好きな音楽
