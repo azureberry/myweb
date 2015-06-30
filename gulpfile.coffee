@@ -59,9 +59,9 @@ gulp.task 'js', ->
   gulp
     .src config.path.js
     .pipe $.plumber(ERROR_HANDLER)
-    .pipe $.coffeelint()
-    .pipe $.coffeelint.reporter()
-    .pipe $.coffee()
+    # .pipe $.coffeelint()
+    # .pipe $.coffeelint.reporter()
+    .pipe $.webpack require('./webpack.config.coffee')
 #    .pipe $.jshint()
 #    .pipe $.jshint.reporter 'jshint-stylish'
     .pipe $.if isRelease, $.uglify()
@@ -70,7 +70,7 @@ gulp.task 'js', ->
 gulp.task 'scss', ->
   gulp
     .src config.path.scss
-    .pipe $.plumber()
+    .pipe $.plumber(ERROR_HANDLER)
 #    .pipe wiredep()
     .pipe $.scssLint()
     .pipe $.rubySass(compass : true)
@@ -187,11 +187,6 @@ gulp.task "bower", ['lib-clean'],->
     #その他ファイル
 #    .pipe gulp.dest config.outpath.lib
     return
-
-###
-gulp.task "webpack", ->
-  webpack require('./webpack.config.js')
-###
 
 gulp.task "wiredep", ->
   gulp
