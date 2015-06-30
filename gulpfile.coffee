@@ -8,6 +8,9 @@ wiredep = require('wiredep').stream
 del = require 'del'
 browserSync = require 'browser-sync'
 
+karma = require('karma').server
+
+
 #path
 $src = './src'
 $WebContent = './WebContent'
@@ -24,7 +27,7 @@ config =
                  json: $src + '/json'
                  jsondata: $src + '/json/'+configFileName+'.json'
                  yml: $src + '/json/**/*.yml'
-                 img: $src + '/img/**/*'
+                 img: $src + '/img/!(sprite)**/*'
                  link: $src + '/link/**/*'
               outpath:
                 js: $WebContent + '/js'
@@ -34,6 +37,9 @@ config =
                 link: $WebContent + '/link'
                 lib: $WebContent + '/lib'
                 libfont: $WebContent + '/lib/fonts'
+              test:
+                karma:  __dirname + '/karma.conf.coffee'
+                protractor:  __dirname + '/protractor.conf.coffee'
 
 AUTOPREFIXER_BROWSERS = [
       'ie >= 10',
@@ -64,7 +70,7 @@ gulp.task 'js', ->
 gulp.task 'scss', ->
   gulp
     .src config.path.scss
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.plumber()
 #    .pipe wiredep()
     .pipe $.scssLint()
     .pipe $.rubySass(compass : true)
@@ -221,3 +227,34 @@ gulp.task 'build', -> runSequence(
   ['img',
   'link'],
 )
+
+###
+  test
+###
+gulp.task 'karma', ->
+  karma.start {configFile: config.test.karma}
+
+gulp.task 'webserver', ->
+  gulp.src('./WebContent')
+  .pipe $.webserver
+    host: 'localhost'
+    port: 8888
+
+gulp.task 'protractor', ->
+  gulp.src([ './spec/e2e/e2eSpec.coffee' ])
+    .pipe $.protractor.protractor(
+      configFile: config.test.protractor
+      # args: [
+      #   '--baseUrl', 'http://localhost:8888'
+      # ]
+      )
+    .on 'error', (e) -> throw e
+    return
+
+gulp.task 'test', (callback) ->
+  runSequence(
+    # 'webserver'
+    'protractor'
+    callback
+    )
+  return

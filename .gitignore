@@ -7,4 +7,5 @@
 /src/jade/fragment/*
 /src/img/*
 /src/link/*
+/spec/coverage/*
 *.log

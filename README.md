@@ -24,6 +24,9 @@ You'll need to have the following items installed before continuing.
    `npm install gulp --save-dev`
    `npm install coffee-script --save-dev`
 
+  * [protractor](https://github.com/angular/protractor)
+  `node node_module/protractor/bin/webdriver-manager update`
+
 
 ## Quickstart
   `npm install`

@@ -1,6 +1,7 @@
 #$(document).foundation()
 
-$(document).ready ->
+onReady =  ->
+# $(document).ready ->
 
   #go tp TOP
   pageTop = $('.goto_page-top')
@@ -10,7 +11,7 @@ $(document).ready ->
   #       pageTop.fadeIn()
   #     else
   #       pageTop.fadeOut()
-  pageTop.click ->
+  pageTop.bind 'click', ->
     $('body, html').animate { scrollTop: 0 }, 200, 'swing'
     false
 
@@ -29,7 +30,7 @@ $(document).ready ->
 
   #ページ内リンク
   headerH = 70
-  $('a[href^=#]').click ->
+  $('a[href^=#]').bind 'click', ->
     href = $(this).attr('href')
     target = $(if href == '#' or href == '' then 'html' else href)
     position = target.offset().top - headerH
@@ -45,6 +46,9 @@ $(document).ready ->
         width : 50,
         height : 50
   )
+
+
+$(document).ready onReady
 
 
 $(window).resize ->
