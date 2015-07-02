@@ -239,17 +239,21 @@ gulp.task 'protractor', ->
   gulp.src([ './spec/e2e/e2eSpec.coffee' ])
     .pipe $.protractor.protractor(
       configFile: config.test.protractor
-      # args: [
-      #   '--baseUrl', 'http://localhost:8888'
-      # ]
+      args: [
+        '--baseUrl', 'http://localhost:8888'
+      ]
       )
     .on 'error', (e) -> throw e
     return
 
+gulp.task 'webserver-exit', ->
+  gulp.src('').pipe $.exit()
+
 gulp.task 'test', (callback) ->
   runSequence(
-    # 'webserver'
+    'webserver'
     'protractor'
+    # 'webserver-exit'
     callback
     )
   return
