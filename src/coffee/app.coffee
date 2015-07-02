@@ -4,7 +4,7 @@ onReady =  ->
 # $(document).ready ->
 
   #go tp TOP
-  pageTop = $('.goto_page-top')
+  pageTop = $('.gototop')
   # pageTop.hide()
   # $(window).scroll ->
   #     if $(this).scrollTop() > 600
