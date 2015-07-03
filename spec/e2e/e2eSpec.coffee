@@ -1,51 +1,36 @@
 describe 'テスト（更新履歴）', ->
-  # firstNumber = element(By.model('first'))
-  # secondNumber = element(By.model('second'))
-  # goButton = element(By.id('gobutton'))
-  # latestResult = element(By.binding('latest'))
-  # history = element.all(By.repeater('result in memory'))
 
-  # add = (a, b) ->
-  #   firstNumber.sendKeys a
-  #   secondNumber.sendKeys b
-  #   goButton.click()
-  #   return
+  submenu_link_last = $$('.submenulist li').last()
+
 
   beforeEach ->
-    # browser.get 'http://juliemr.github.io/protractor-demo/'
-    browser.get browser.baseUrl+'/history.html'
+    width = 1500;
+    height = 1000;
+    browser.driver.manage().window().setSize(width, height);
     browser.ignoreSynchronization = true;
+    browser.get browser.baseUrl+'/history.html'
     return
 
 
-  # it 'should have a history', ->
-  #   add 1, 2
-  #   add 3, 4
-  #   expect(history.count()).toEqual 2
-  #   add 5, 6
-  #   expect(history.count()).toEqual 3 # This is wrong!
-  #   return
-  # return
-
-
   it 'サブメニューの最後の要素は「2006年」', ->
-    # submenu_link = $('.submenulist li :last')
-    element By.id '.submenulist'
-    # expect(submenu_link.text()).toEqual '2006年'
+    expect(submenu_link_last.getText()).toEqual '2006年'
 
-  # it 'サブメニューの最後の要素のリンク先は、#submenu[0-9]*であること', ->
-  #   submenu_link = $('.submenulist li :last')
-  #   submenu_link_href = submenu_link.attr('href')
-  #   expect(submenu_link_href).toMatch '^#submenu[0-9]*$'
+  it 'サブメニューの最後の要素のリンク先は、#submenu[0-9]*であること', ->
+    submenu_link_href = submenu_link_last.$('a').getAttribute('href')
+    expect(submenu_link_href).toMatch '#submenu[0-9]*$'
 
-  # it 'サブメニューリンクをクリックすることで、ページ内リンク先に移動すること', ->
-  #   submenu_link = $('.submenulist li :last')
-  #   submenu_link_href = submenu_link.attr('href')
-  #   link_title = $(submenu_link_href)
-  #   expect($('html, body').scrollTop()).toEqual 0
-  #   submenu_link.trigger("click")
-  #   link_title = $(submenu_link_href)
-  #   expect($('html, body').scrollTop()).toEqual link_title.position().top
+  it 'サブメニューリンクをクリックすることで、ページ内リンク先に移動すること', ->
+    # browser.executeScript('return document.body.scrollTop;').then (scrollTop) ->
+    #   expect(scrollTop).toEqual 0
+
+    # browser.wait(submenu_link_last.click, 50)
+    # # submenu_link_last.click
+    # # browser.sleep(500)
+
+    # $('#submenu8').getLocation().then (someclass_data) ->
+    #   submenu_linkto_position_y = someclass_data.y
+    #   browser.executeScript('return document.body.scrollTop;').then (scrollTop) ->
+    #     expect(scrollTop).toEqual submenu_linkto_position_y
 
 
   # it 'スクロールすると、サブメニューが合わせて移動すること', ->
