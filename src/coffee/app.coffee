@@ -3,7 +3,7 @@
 onReady =  ->
 # $(document).ready ->
 
-  #go tp TOP
+  #go to TOP
   pageTop = $('.gototop')
   # pageTop.hide()
   # $(window).scroll ->
