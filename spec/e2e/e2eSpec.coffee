@@ -5,6 +5,7 @@ describe 'テスト（更新履歴）', ->
   submenu_link_list = $$('.submenulist li')
   submenu_link_last = submenu_link_list.last()
   submenu = $('.submenulist')
+  mainrow = $('.main-row')
   gototop_link = $('.gototop')
 
   SLEEP_TIME = 1000
@@ -40,7 +41,8 @@ describe 'テスト（更新履歴）', ->
     submenu_link_last.$('a').getAttribute('href').then (submenu_link_url) ->
       submenu_link_id = h.getLinkId(submenu_link_url)
       $(submenu_link_id).getLocation().then (locationdata) ->
-        expect(h.getScrollTop()).toEqual locationdata.y - 70
+        mainrow.getCssValue('padding-top').then (headerH) ->
+          expect(h.getScrollTop()).toEqual locationdata.y - parseInt(headerH, 10)
 
 
   it 'スクロールすると、サブメニューが合わせて移動すること', ->
