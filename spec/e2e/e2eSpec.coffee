@@ -8,6 +8,10 @@ describe 'テスト（更新履歴）', ->
   gototop_link = $('.gototop')
   SLEEP_TIME = 1000
 
+  hasClass = (element, cls) ->
+    element.getAttribute('class').then (classes) ->
+      classes.split(' ').indexOf(cls) != -1
+
 
   beforeEach ->
     width = 1500
@@ -35,7 +39,7 @@ describe 'テスト（更新履歴）', ->
     submenu_link_last.click()
     browser.sleep(SLEEP_TIME)
 
-    # リンク後のスクロール位置の確認
+    # クリック後のスクロール位置の確認
     submenu_link_last.$('a').getAttribute('href').then (submenu_link_url) ->
       submenu_link_id = submenu_link_url.substring(
                                              submenu_link_url.lastIndexOf('#'),
@@ -60,11 +64,16 @@ describe 'テスト（更新履歴）', ->
       submenu.getLocation().then (locationdata) ->
         expect(locationdata.y).toEqual scrollTop + init_locationdata_y
 
-  # it 'スクロールすると、scrollspyが動作すること', ->
+  it 'スクロールすると、scrollspyが動作すること', ->
     # 初期のactiveクラス取得
-    # submenu_link_list.By css('.active').count().then (num) ->
-    #   expect(num).toEqual 0
+    expect(hasClass(submenu_link_last, 'active')).toBe(false)
 
+    # スクロール
+    submenu_link_last.click()
+    browser.sleep(SLEEP_TIME)
+
+    # スクロール後に、titleに一致した項目がactiveになっていること
+    expect(hasClass(submenu_link_last, 'active')).toBe(true)
 
   it 'トップへボタンで、ページ先頭に移動すること', ->
     # トップへボタンをクリック前に、スクロールする。初期位置が正しいこと
