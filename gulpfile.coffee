@@ -19,6 +19,7 @@ config =
               path:
                  js: $src + '/coffee/**/*.coffee'
                  scss: $src + '/scss/**/*.scss'
+                 scssroot: $src + '/scss/style.scss'
                  scssSourceMap: '../../'+$src + '/scss'
                  jade: $src + '/jade/**/*.jade'
                  jadetask: $src + '/jade/**/!(_)*.jade'
@@ -68,13 +69,15 @@ gulp.task 'js', ->
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
 
-gulp.task 'scss', ->
+gulp.task 'scss-lint', ->
   gulp
     .src config.path.scss
     .pipe $.plumber(ERROR_HANDLER)
-#    .pipe wiredep()
     .pipe $.scssLint()
-    .pipe $.rubySass(compass : true)
+
+gulp.task 'scss', ['scss-lint'], ->
+    $.rubySass(config.path.scssroot)
+    .on 'error', (e) -> throw e
     .pipe $.pleeease(
               autoprefixer: AUTOPREFIXER_BROWSERS,
               minifier: false

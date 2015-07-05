@@ -1,13 +1,17 @@
-.gallery li { display: inline; }
-
-.gototop{
-  position:fixed;
-  right:20px;
-  bottom:20px;
+.gallery li {
+  display: inline;
 }
+
+.gototop {
+  bottom: 20px;
+  position: fixed;
+  right: 20px;
+}
+
 .gototop-bg-btn {
   color: #e1e8ed;
 }
+
 .gototop-text {
   color: #55acee;
 }
