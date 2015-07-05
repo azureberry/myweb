@@ -18,9 +18,9 @@ configFileName = 'config'
 config =
               path:
                  js: $src + '/coffee/**/*.coffee'
-                 scss: $src + '/scss/**/*.scss'
-                 scssroot: $src + '/scss/style.scss'
-                 scssSourceMap: '../../'+$src + '/scss'
+                 sass: $src + '/scss/**/*.scss'
+                 sassroot: $src + '/scss/style.scss'
+                 sassSourceMap: '../../'+$src + '/scss'
                  jade: $src + '/jade/**/*.jade'
                  jadetask: $src + '/jade/**/!(_)*.jade'
                  json: $src + '/json'
@@ -69,14 +69,14 @@ gulp.task 'js', ->
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
 
-gulp.task 'scss-lint', ->
+gulp.task 'sass-lint', ->
   gulp
-    .src config.path.scss
+    .src config.path.sass
     .pipe $.plumber(ERROR_HANDLER)
     .pipe $.scssLint()
 
-gulp.task 'scss', ['scss-lint'], ->
-    $.rubySass(config.path.scssroot)
+gulp.task 'sass', ['sass-lint'], ->
+    $.rubySass(config.path.sassroot)
     .on 'error', (e) -> throw e
     .pipe $.pleeease(
               autoprefixer: AUTOPREFIXER_BROWSERS,
@@ -193,7 +193,7 @@ gulp.task "bower", ['lib-clean'],->
 
 gulp.task "wiredep", ->
   gulp
-    .src config.path.scss
+    .src config.path.sass
     .pipe wiredep()
     .pipe gulp.dest $src + '/scss/'
 
@@ -206,7 +206,7 @@ gulp.task 'json2yml', ->
 
 gulp.task 'watch', ->
   $.watch config.path.js, ->gulp.start ['js','brower-reload']
-  $.watch config.path.scss, ->gulp.start ['scss','brower-reload']
+  $.watch config.path.sass, ->gulp.start ['sass','brower-reload']
   $.watch [config.path.yml], ->gulp.start ['yml']
 #  $.watch [config.path.json], ->gulp.start ['json','jade']
   $.watch [config.path.jade, config.path.jsondata], ->gulp.start ['jade','brower-reload']
@@ -218,7 +218,7 @@ gulp.task 'default', ['browser', 'watch']
 gulp.task 'build', -> runSequence(
   'bower',
   ['js',
-  'scss',
+  'sass',
 #  'json',
   'yml'],
   'jade',

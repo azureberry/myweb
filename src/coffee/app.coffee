@@ -1,5 +1,3 @@
-#$(document).foundation()
-
 onReady =  ->
 # $(document).ready ->
 

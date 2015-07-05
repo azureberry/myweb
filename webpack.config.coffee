@@ -10,8 +10,8 @@ module.exports =
   # entry:
   #   app: ['./src/js/app.coffee']
 
-  # output:
-  #   filename: './WebContent/js'
+  output:
+    filename: 'app.js'
 
   module: loaders: [ {
           test: /\.coffee$/
