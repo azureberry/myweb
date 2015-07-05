@@ -4,7 +4,6 @@ bowerfiles  = require 'main-bower-files'
 runSequence = require 'run-sequence'
 #manifest     = require('asset-builder')('./manifest.json')
 wiredep = require('wiredep').stream
-#webpack = require('webpack')
 del = require 'del'
 browserSync = require 'browser-sync'
 
@@ -23,12 +22,12 @@ config =
                  scssSourceMap: '../../'+$src + '/scss'
                  jade: $src + '/jade/**/*.jade'
                  jadetask: $src + '/jade/**/!(_)*.jade'
-#                 jadebase: $src + '/jade/'
                  json: $src + '/json'
                  jsondata: $src + '/json/'+configFileName+'.json'
                  yml: $src + '/json/**/*.yml'
                  img: $src + '/img/!(sprite)**/*'
                  link: $src + '/link/**/*'
+                 webpack:  __dirname + '/webpack.config.coffee'
               outpath:
                 js: $WebContent + '/js'
                 css: $WebContent + '/css'
@@ -40,6 +39,10 @@ config =
               test:
                 karma:  __dirname + '/karma.conf.coffee'
                 protractor:  __dirname + '/protractor.conf.coffee'
+                spec: './spec/e2e/e2eSpec.coffee'
+                host: 'localhost'
+                port: 8888
+
 
 AUTOPREFIXER_BROWSERS = [
       'ie >= 10',
@@ -61,9 +64,7 @@ gulp.task 'js', ->
     .pipe $.plumber(ERROR_HANDLER)
     # .pipe $.coffeelint()
     # .pipe $.coffeelint.reporter()
-    .pipe $.webpack require('./webpack.config.coffee')
-#    .pipe $.jshint()
-#    .pipe $.jshint.reporter 'jshint-stylish'
+    .pipe $.webpack require(config.path.webpack)
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
 
@@ -102,7 +103,6 @@ gulp.task 'jade', ->
     .src config.path.jadetask
     .pipe $.plumber(ERROR_HANDLER)
     .pipe $.jade(
-#              basedir: config.path.jadebase
               data: require(config.path.jsondata)
               pretty: true
       )
@@ -229,31 +229,24 @@ gulp.task 'build', -> runSequence(
 gulp.task 'karma', ->
   karma.start {configFile: config.test.karma}
 
-gulp.task 'webserver', ->
+gulp.task 'webserver-start', ->
   gulp.src('./WebContent')
   .pipe $.webserver
-    host: 'localhost'
-    port: 8888
+    host: config.test.host
+    port: config.test.port
 
 gulp.task 'protractor', ->
-  gulp.src([ './spec/e2e/e2eSpec.coffee' ])
+  gulp.src([config.test.spec])
     .pipe $.protractor.protractor(
       configFile: config.test.protractor
-      args: [
-        '--baseUrl', 'http://localhost:8888'
-      ]
+      args: ['--baseUrl', 'http://'+config.test.host+':'+config.test.port]
       )
+    .on 'end', -> process.exit()
     .on 'error', (e) -> throw e
-    return
 
-gulp.task 'webserver-exit', ->
-  gulp.src('').pipe $.exit()
 
 gulp.task 'test', (callback) ->
   runSequence(
-    'webserver'
+    'webserver-start'
     'protractor'
-    # 'webserver-exit'
-    callback
     )
-  return
