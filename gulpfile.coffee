@@ -66,14 +66,14 @@ isJenkins = $.util.env.jenkins?
 gulp.task 'js-lint', ->
   gulp
     .src config.path.js
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.coffeelint(config.path.jslintConfig)
     .pipe $.coffeelint.reporter()
 
 gulp.task 'js', ->
   gulp
     .src config.path.js
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.webpack require(config.path.webpack)
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
@@ -81,7 +81,7 @@ gulp.task 'js', ->
 gulp.task 'sass-lint', ->
   gulp
     .src config.path.sass
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.scssLint(
       config : config.path.sasslintConfig
       customReport: $.scssLintStylish2().issues
@@ -113,13 +113,13 @@ gulp.task 'sass', ->
 gulp.task 'yml-lint', ->
   gulp
     .src config.path.yml
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.yamlValidate({safe : true})
 
 gulp.task 'yml', ->
   gulp
     .src config.path.yml
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.concat(configFileName+'.yml')
     .pipe $.convert(
               from: 'yml',
@@ -190,7 +190,7 @@ gulp.task "bower", ['lib-clean'],->
                              ]
   gulp
     .src files
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     #cssファイルの場合
     .pipe cssFilter
     .pipe $.concat "vender.min.css"
