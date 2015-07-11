@@ -80,6 +80,7 @@
     "phantomjs": "^1.9.17",
     "protractor": "^2.1.0",
     "protractor-coffee-preprocessor": "0.0.1",
+    "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
     "webpack": "^1.9.10",
     "wiredep": "^2.2.2"
