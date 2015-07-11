@@ -2,7 +2,6 @@ gulp         = require 'gulp'
 $             = require('gulp-load-plugins')()
 bowerfiles  = require 'main-bower-files'
 runSequence = require 'run-sequence'
-#manifest     = require('asset-builder')('./manifest.json')
 wiredep = require('wiredep').stream
 del = require 'del'
 browserSync = require 'browser-sync'
@@ -62,6 +61,7 @@ ERROR_HANDLER = {
 }
 
 isRelease = $.util.env.release?
+isJenkins = $.util.env.jenkins?
 
 gulp.task 'js-lint', ->
   gulp
@@ -129,7 +129,7 @@ gulp.task 'yml', ->
 gulp.task 'jade', ->
   gulp
     .src config.path.jadetask
-    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.jade(
               data: require(config.path.jsondata)
               pretty: true
