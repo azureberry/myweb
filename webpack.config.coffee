@@ -12,12 +12,14 @@ module.exports =
 
   output:
     filename: 'app.js'
+    sourceMapFilename: __dirname + '/../../sourcemap/[file].map'
+
+  devtool: 'source-map'
 
   module: loaders: [ {
           test: /\.coffee$/
           exclude: /node_modules/
           loader: 'coffee-loader'
-          # devtool: 'inline-source-map'
           } ]
 
   plugins:[

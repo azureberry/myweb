@@ -18,25 +18,29 @@ configFileName = 'config'
 config =
               path:
                  js: $src + '/coffee/**/*.coffee'
+                 jslintConfig: __dirname + '/coffeelint.json'
                  sass: $src + '/scss/**/*.scss'
                  sassroot: $src + '/scss/style.scss'
-                 sassSourceMap: '../../'+$src + '/scss'
+                 sasslintConfig: __dirname + '/sasslint.yml'
+                 # sassSourceMap: '../../'+$src + '/scss'
                  jade: $src + '/jade/**/*.jade'
                  jadetask: $src + '/jade/**/!(_)*.jade'
                  json: $src + '/json'
                  jsondata: $src + '/json/'+configFileName+'.json'
                  yml: $src + '/json/**/*.yml'
-                 img: $src + '/img/!(sprite)**/*'
-                 link: $src + '/link/**/*'
+                 img: $src + '/img/**/*'
+                 link : $src + '/link/**/*'
                  webpack:  __dirname + '/webpack.config.coffee'
               outpath:
                 js: $WebContent + '/js'
                 css: $WebContent + '/css'
                 html: $WebContent
-                img: $WebContent + '/img'
+                img: $WebContent  + '/img'
                 link: $WebContent + '/link'
                 lib: $WebContent + '/lib'
                 libfont: $WebContent + '/lib/fonts'
+                sourcemap: __dirname + '/sourcemap'
+                # sourcemap: 'sourcemap'
               test:
                 karma:  __dirname + '/karma.conf.coffee'
                 protractor:  __dirname + '/protractor.conf.coffee'
@@ -59,12 +63,17 @@ ERROR_HANDLER = {
 
 isRelease = $.util.env.release?
 
+gulp.task 'js-lint', ->
+  gulp
+    .src config.path.js
+    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.coffeelint(config.path.jslintConfig)
+    .pipe $.coffeelint.reporter()
+
 gulp.task 'js', ->
   gulp
     .src config.path.js
     .pipe $.plumber(ERROR_HANDLER)
-    # .pipe $.coffeelint()
-    # .pipe $.coffeelint.reporter()
     .pipe $.webpack require(config.path.webpack)
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
@@ -73,23 +82,39 @@ gulp.task 'sass-lint', ->
   gulp
     .src config.path.sass
     .pipe $.plumber(ERROR_HANDLER)
-    .pipe $.scssLint()
+    .pipe $.scssLint(
+      config : config.path.sasslintConfig
+      customReport: $.scssLintStylish2().issues
+    )
+    .pipe $.scssLintStylish2().printSummary
 
-gulp.task 'sass', ['sass-lint'], ->
-    $.rubySass(config.path.sassroot)
+gulp.task 'sass', ->
+    $.rubySass(config.path.sassroot,
+      style: 'expanded'
+      sourcemap: true
+      )
     .on 'error', (e) -> throw e
     .pipe $.pleeease(
               autoprefixer: AUTOPREFIXER_BROWSERS,
               minifier: false
       )
     .pipe $.if isRelease, $.minifyCss()
+    .pipe $.sourcemaps.write(config.outpath.sourcemap,
+      includeContent: false
+      )
     .pipe gulp.dest config.outpath.css
 
-gulp.task 'json', ->
+# gulp.task 'json', ->
+#   gulp
+#     .src config.path.jsondata
+#     .pipe $.jsonlint()
+#     .pipe $.jsonlint.reporter()
+
+gulp.task 'yml-lint', ->
   gulp
-    .src config.path.jsondata
-    .pipe $.jsonlint()
-    .pipe $.jsonlint.reporter()
+    .src config.path.yml
+    .pipe $.plumber(ERROR_HANDLER)
+    .pipe $.yamlValidate({safe : true})
 
 gulp.task 'yml', ->
   gulp

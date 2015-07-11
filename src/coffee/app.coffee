@@ -1,4 +1,4 @@
-onReady =  ->
+onReady = ->
 # $(document).ready ->
 
   #go to TOP
@@ -10,7 +10,7 @@ onReady =  ->
   #     else
   #       pageTop.fadeOut()
   pageTop.bind 'click', ->
-    $('body, html').animate { scrollTop: 0 }, 200, 'swing'
+    $('body, html').animate {scrollTop : 0}, 200, 'swing'
     false
 
   #affix
@@ -32,7 +32,7 @@ onReady =  ->
     href = $(this).attr('href')
     target = $(if href == '#' or href == '' then 'html' else href)
     position = target.offset().top - headerH
-    $('html, body').animate { scrollTop: position }, 550, 'swing'
+    $('html, body').animate {scrollTop : position}, 550, 'swing'
     false
 
   # lightbox prettyPhoto

@@ -8,4 +8,5 @@
 /src/img/*
 /src/link/*
 /spec/coverage/*
+/sourcemap/*
 *.log
