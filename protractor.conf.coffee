@@ -30,13 +30,11 @@ exports.config =
     defaultTimeoutInterval: 30000
 
   onPrepare: ->
-    specReporter = new SpecReporter(displayStacktrace: true)
-    junitReporter = new jasmineReporter.JUnitXmlReporter(
+    jasmine.getEnv().addReporter new SpecReporter(displayStacktrace: true)
+    jasmine.getEnv().addReporter new jasmineReporter.JUnitXmlReporter(
       savePath: __dirname + '/spec/result/junit'
       consolidateAll: false
       )
-    jasmine.getEnv().addReporter specReporter
-    jasmine.getEnv().addReporter junitReporter
     return
 
   # plugins: [

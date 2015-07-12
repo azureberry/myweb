@@ -27,7 +27,7 @@ onReady = ->
   #   offset: '85'
 
   #ページ内リンク
-  headerH = 70 #$('.main-row').attr('padding-top')
+  headerH = parseInt($('.main-row').css('padding-top'), 10)
   $('a[href^=#]').bind 'click', ->
     href = $(this).attr('href')
     target = $(if href == '#' or href == '' then 'html' else href)
