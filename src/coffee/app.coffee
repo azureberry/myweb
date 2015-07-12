@@ -27,12 +27,12 @@ onReady = ->
   #   offset: '85'
 
   #ページ内リンク
-  headerH = $('.main-row').attr('padding-top')
+  headerH = 70 #$('.main-row').attr('padding-top')
   $('a[href^=#]').bind 'click', ->
     href = $(this).attr('href')
     target = $(if href == '#' or href == '' then 'html' else href)
     position = target.offset().top - headerH
-    $('html, body').animate {scrollTop : position}, 550, 'swing'
+    $('html, body').animate {scrollTop : position}, 200, 'swing'
     false
 
   # lightbox prettyPhoto

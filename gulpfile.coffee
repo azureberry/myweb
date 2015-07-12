@@ -277,4 +277,5 @@ gulp.task 'test', (callback) ->
   runSequence(
     'webserver-start'
     'protractor'
+    callback
     )

@@ -11,6 +11,15 @@ exports.config =
 
   capabilities:
     browserName: 'chrome'
+    chromeOptions:
+        args: [
+            '--disable-cache',
+            '--disable-application-cache',
+            '--disable-offline-load-stale-cache',
+            '--disk-cache-size=0',
+            '--v8-cache-options=off'
+        ]
+
 
   framework: 'jasmine2'
 
