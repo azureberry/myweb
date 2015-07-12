@@ -1,4 +1,5 @@
 SpecReporter = require('jasmine-spec-reporter')
+jasmineReporter = require('jasmine-reporters')
 
 exports.config =
   #   seleniumServerJar:  './node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar'
@@ -26,11 +27,16 @@ exports.config =
   jasmineNodeOpts:
     showColors: true
     isVerbose: true
-    defaultTimeoutInterval: 60000
+    defaultTimeoutInterval: 30000
 
   onPrepare: ->
-    reporter = new SpecReporter(displayStacktrace: true)
-    jasmine.getEnv().addReporter reporter
+    specReporter = new SpecReporter(displayStacktrace: true)
+    junitReporter = new jasmineReporter.JUnitXmlReporter(
+      savePath: __dirname + '/spec/result/junit'
+      consolidateAll: false
+      )
+    jasmine.getEnv().addReporter specReporter
+    jasmine.getEnv().addReporter junitReporter
     return
 
   # plugins: [

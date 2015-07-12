@@ -73,7 +73,7 @@ module.exports = (config) ->
 
     coverageReporter:
       type: 'html'
-      dir: 'spec/coverage/'
+      dir: 'spec/result/coverage/'
 
 
     webpack:
