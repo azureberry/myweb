@@ -26,7 +26,7 @@ exports.config =
   jasmineNodeOpts:
     showColors: true
     isVerbose: true
-    defaultTimeoutInterval: 30000
+    defaultTimeoutInterval: 60000
 
   onPrepare: ->
     reporter = new SpecReporter(displayStacktrace: true)
