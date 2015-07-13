@@ -40,6 +40,7 @@ config =
                 libfont: $WebContent + '/lib/fonts'
                 sourcemap: __dirname + '/sourcemap'
                 # sourcemap: 'sourcemap'
+                lint:  __dirname + '/result/lint'
               test:
                 karma:  __dirname + '/karma.conf.coffee'
                 protractor:  __dirname + '/protractor.conf.coffee'
@@ -67,8 +68,9 @@ gulp.task 'js-lint', ->
   gulp
     .src config.path.js
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
-    .pipe $.coffeelint(config.path.jslintConfig)
-    .pipe $.coffeelint.reporter()
+    .pipe $.coffeelint(optFile: config.path.jslintConfig)
+    .pipe $.if !isJenkins, $.coffeelint.reporter(), $.coffeelint.reporter('checkstyle', config.outpath.lint)
+    # .pipe gulp.dest config.outpath.lint
 
 gulp.task 'js', ->
   gulp
@@ -79,14 +81,20 @@ gulp.task 'js', ->
     .pipe gulp.dest config.outpath.js
 
 gulp.task 'sass-lint', ->
+  sasslintConfig = {
+      config : config.path.sasslintConfig
+      customReport: $.scssLintStylish2().issues
+    }
+  if isJenkins
+    sasslintConfig.reporterOutputFormat = 'Checkstyle'
+    sasslintConfig.reporterOutput = config.outpath.lint+ '/scssReport.xml'
+
   gulp
     .src config.path.sass
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
-    .pipe $.scssLint(
-      config : config.path.sasslintConfig
-      customReport: $.scssLintStylish2().issues
-    )
+    .pipe $.scssLint(sasslintConfig)
     .pipe $.scssLintStylish2().printSummary
+
 
 gulp.task 'sass', ->
     $.rubySass(config.path.sassroot,
@@ -229,6 +237,8 @@ gulp.task 'json2yml', ->
       to: 'yml')
    .pipe gulp.dest $src + '/json'
 
+gulp.task 'default', ['browser', 'watch']
+
 gulp.task 'watch', ->
   $.watch config.path.js, ->gulp.start ['js','brower-reload']
   $.watch config.path.sass, ->gulp.start ['sass','brower-reload']
@@ -238,8 +248,8 @@ gulp.task 'watch', ->
   $.watch config.path.img, ->gulp.start ['img','brower-reload']
   $.watch config.path.link, ->gulp.start ['link','brower-reload']
 
+gulp.task 'lint', ['sass-lint']
 
-gulp.task 'default', ['browser', 'watch']
 gulp.task 'build', -> runSequence(
   'bower',
   ['js',

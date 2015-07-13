@@ -7,6 +7,6 @@
 /src/jade/fragment/*
 /src/img/*
 /src/link/*
-/spec/result/*
+/result/*
 /sourcemap/*
 *.log

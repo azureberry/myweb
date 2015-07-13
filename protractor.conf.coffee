@@ -32,7 +32,7 @@ exports.config =
   onPrepare: ->
     jasmine.getEnv().addReporter new SpecReporter(displayStacktrace: true)
     jasmine.getEnv().addReporter new jasmineReporter.JUnitXmlReporter(
-      savePath: __dirname + '/spec/result/junit'
+      savePath: __dirname + '/result/junit'
       consolidateAll: false
       )
     return

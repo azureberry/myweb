@@ -11,6 +11,9 @@ You'll need to have the following items installed before continuing.
   * [Sass](http://sass-lang.com/) `gem install sass`
   * [Compass](http://compass-style.org/) `gem install compass`
 
+  `gem install scss_lint`
+  `gem install scss_lint_reporter_checkstyle`
+
 
   * [Node.js](http://nodejs.org): Use the installer provided on the NodeJS website.
   * [jade](http://jade-lang.com/) `npm install -g jade`
