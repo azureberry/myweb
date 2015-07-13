@@ -87,13 +87,14 @@ gulp.task 'sass-lint', ->
     }
   if isJenkins
     sasslintConfig.reporterOutputFormat = 'Checkstyle'
-    sasslintConfig.reporterOutput = config.outpath.lint+ '/scssReport.xml'
+    sasslintConfig.filePipeOutput = 'scssReport.xml'
 
   gulp
     .src config.path.sass
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.scssLint(sasslintConfig)
     .pipe $.scssLintStylish2().printSummary
+    .pipe $.if isJenkins, gulp.dest config.outpath.lint
 
 
 gulp.task 'sass', ->
