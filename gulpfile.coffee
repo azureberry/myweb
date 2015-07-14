@@ -257,7 +257,7 @@ gulp.task 'watch', ->
   $.watch config.path.img, ->gulp.start ['img','brower-reload']
   $.watch config.path.link, ->gulp.start ['link','brower-reload']
 
-gulp.task 'lint', ['sass-lint']
+gulp.task 'lint', ['sass-lint', 'js-lint']
 
 gulp.task 'build', -> runSequence(
   'bower',
