@@ -77,7 +77,7 @@ gulp.task 'js-lint', ->
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.coffeelint(optFile: config.path.jslintConfig)
     .pipe $.if !isJenkins, $.coffeelint.reporter(), $.coffeelint.reporter('checkstyle')
-    .on 'end', -> $.if !isJenkins, console.log = tempfunc
+    .on 'end', -> $.if isJenkins, console.log = tempfunc
 
 gulp.task 'js', ->
   gulp
