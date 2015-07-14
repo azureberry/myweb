@@ -65,12 +65,20 @@ isRelease = $.util.env.release?
 isJenkins = $.util.env.jenkins?
 
 gulp.task 'js-lint', ->
+  tempfunc = console.log
+  if isJenkins
+    fs = require('fs')
+    log_file = fs.createWriteStream(config.outpath.lint + '/coffeelint.xml', {flags : 'w'})
+    console.log = (d) ->
+      log_file.write d + '\n'
+      log_file.write d.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '') + '\n'
+
   gulp
     .src config.path.js
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
     .pipe $.coffeelint(optFile: config.path.jslintConfig)
-    .pipe $.if !isJenkins, $.coffeelint.reporter(), $.coffeelint.reporter('checkstyle', config.outpath.lint)
-    # .pipe gulp.dest config.outpath.lint
+    .pipe $.if !isJenkins, $.coffeelint.reporter(), $.coffeelint.reporter('checkstyle')
+    .on 'end', -> $.if !isJenkins, console.log = tempfunc
 
 gulp.task 'js', ->
   gulp

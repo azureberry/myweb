@@ -2,7 +2,7 @@
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "Webcontest/css"
+css_dir = "Webcontent/css"
 sass_dir = "src/scss"
 images_dir = "src/img"
 javascripts_dir = "javascripts"

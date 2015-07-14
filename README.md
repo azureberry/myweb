@@ -33,3 +33,4 @@ You'll need to have the following items installed before continuing.
 
 ## Quickstart
   `npm install`
+  `bower install`
