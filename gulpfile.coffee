@@ -70,7 +70,7 @@ gulp.task 'js-lint', ->
     fs = require('fs')
     log_file = fs.createWriteStream(config.outpath.lint + '/coffeelint.xml', {flags : 'w'})
     console.log = (d) ->
-      log_file.write d + '\n'
+      # log_file.write d + '\n'
       log_file.write d.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '') + '\n'
 
   gulp
