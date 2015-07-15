@@ -14,7 +14,7 @@ module.exports =
     filename: 'app.js'
     sourceMapFilename: __dirname + '/../../sourcemap/[file].map'
 
-  devtool: 'source-map'
+  # devtool: 'source-map'
 
   module: loaders: [ {
           test: /\.coffee$/
