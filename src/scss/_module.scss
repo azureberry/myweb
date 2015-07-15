@@ -8,18 +8,27 @@
   right: 20px;
 }
 
+$twitter-color : #55acee;
+$paint-btn-color : #000000;
+$gototop-btn-color : #55acee;
+$sns-btn-color : #e1e8ed;
+
 .gototop-bg-btn {
-  color: #e1e8ed;
+  color: $gototop-btn-color;
 }
 
 .gototop-text {
-  color: #55acee;
-}
-
-.text-twitter {
-  color: #55acee;
+  color: $gototop-btn-color;
 }
 
 .bg-btn-social {
-  color: #e1e8ed;
+  color: $sns-btn-color ;
+}
+
+.text-twitter {
+  color: $twitter-color;
+}
+
+.text-paint {
+  color: $paint-btn-color;
 }
