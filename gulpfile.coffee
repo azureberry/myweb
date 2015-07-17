@@ -120,12 +120,6 @@ gulp.task 'sass', ->
       )
     .pipe gulp.dest config.outpath.css
 
-# gulp.task 'json', ->
-#   gulp
-#     .src config.path.jsondata
-#     .pipe $.jsonlint()
-#     .pipe $.jsonlint.reporter()
-
 gulp.task 'yml-lint', ->
   gulp
     .src config.path.yml
@@ -251,23 +245,22 @@ gulp.task 'watch', ->
   $.watch config.path.js, ->gulp.start ['js','brower-reload']
   $.watch config.path.sass, ->gulp.start ['sass','brower-reload']
   $.watch [config.path.yml], ->gulp.start ['yml']
-#  $.watch [config.path.json], ->gulp.start ['json','jade']
   $.watch [config.path.jade, config.path.jsondata], ->gulp.start ['jade','brower-reload']
   $.watch config.path.img, ->gulp.start ['img','brower-reload']
   $.watch config.path.link, ->gulp.start ['link','brower-reload']
 
-gulp.task 'lint', ['sass-lint', 'js-lint']
 
 gulp.task 'build', -> runSequence(
   'bower',
   ['js',
   'sass',
-#  'json',
-  'yml'],
-  'jade',
-  ['img',
+  'yml',
+  'img',
   'link'],
+  'jade'
 )
+
+gulp.task 'lint', ['sass-lint', 'js-lint']
 
 ###
   test
