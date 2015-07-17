@@ -32,7 +32,7 @@ config =
                  img: $src + '/img/**/*'
                  link : $src + '/link/**/*'
                  webpack:  __dirname + '/webpack.config.coffee'
-                 deploy: $WebContent + '/hostory.html'
+                 deploy: $WebContent + '/**/*'
               outpath:
                 js: $WebContent + '/js'
                 css: $WebContent + '/css'
@@ -196,16 +196,16 @@ gulp.task "bower", ['lib-clean'],->
 
   #bowerパッケージを種類ごとに結合圧縮して各フォルダに格納
   #各ファイル中にパスが記載されている場合は位置関係が崩れる可能性がある
-  cssFilter = $.filter "**/*.css"
-  jsFilter =  $.filter "**/*.js"
-  imgFilter = $.filter ["**/*.gif", "**/*.png"]
+  cssFilter = $.filter '**/*.css'
+  jsFilter =  $.filter '**/*.js'
+  imgFilter = $.filter ['**/*.gif', '**/*.png','!**/*@2x.gif', '!**/*@2x.png']
   fontFilter = $.filter [
-                               "**/*.otf"
-                               "**/*.eot"
-                               "**/*.svg"
-                               "**/*.ttf"
-                               "**/*.woff"
-                               "**/*.woff2"
+                               '**/*.otf'
+                               '**/*.eot'
+                               '**/*.svg'
+                               '**/*.ttf'
+                               '**/*.woff'
+                               '**/*.woff2'
                              ]
   gulp
     .src files
@@ -235,6 +235,21 @@ gulp.task "bower", ['lib-clean'],->
 #    .pipe gulp.dest config.outpath.lib
     return
 
+gulp.task 'deploy', ->
+  conn = ftp.create(
+    host: $.util.env.ftphost
+    user: $.util.env.ftpuser
+    password: $.util.env.ftppass
+    # parallel: 10
+    log: $.util.log
+    )
+
+  gulp
+  .src(config.path.deploy,
+      base: $WebContent
+      buffer: false)
+  .pipe conn.newer('/')
+  .pipe conn.dest('/')
 
 gulp.task 'json2yml', ->
   gulp.src config.path.jsondata
