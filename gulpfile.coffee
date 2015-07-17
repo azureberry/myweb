@@ -5,6 +5,8 @@ runSequence = require 'run-sequence'
 wiredep = require('wiredep').stream
 del = require 'del'
 browserSync = require 'browser-sync'
+ftp = require 'vinyl-ftp'
+webpack = require 'webpack-stream'
 
 karma = require('karma').server
 
@@ -30,6 +32,7 @@ config =
                  img: $src + '/img/**/*'
                  link : $src + '/link/**/*'
                  webpack:  __dirname + '/webpack.config.coffee'
+                 deploy: $WebContent + '/hostory.html'
               outpath:
                 js: $WebContent + '/js'
                 css: $WebContent + '/css'
@@ -83,7 +86,7 @@ gulp.task 'js', ->
   gulp
     .src config.path.js
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
-    .pipe $.webpack require(config.path.webpack)
+    .pipe webpack require(config.path.webpack)
     .pipe $.if isRelease, $.uglify()
     .pipe gulp.dest config.outpath.js
 
@@ -103,6 +106,12 @@ gulp.task 'sass-lint', ->
     .pipe $.scssLintStylish2().printSummary
     .pipe $.if isJenkins, gulp.dest config.outpath.lint
 
+
+gulp.task "wiredep", ->
+  gulp
+    .src config.path.sass
+    .pipe wiredep()
+    .pipe gulp.dest $src + '/scss/'
 
 gulp.task 'sass', ->
     $.rubySass(config.path.sassroot,
@@ -226,11 +235,6 @@ gulp.task "bower", ['lib-clean'],->
 #    .pipe gulp.dest config.outpath.lib
     return
 
-gulp.task "wiredep", ->
-  gulp
-    .src config.path.sass
-    .pipe wiredep()
-    .pipe gulp.dest $src + '/scss/'
 
 gulp.task 'json2yml', ->
   gulp.src config.path.jsondata
