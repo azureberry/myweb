@@ -3,17 +3,15 @@
 // 設定
 // ===================================================================
 
-// 使うリセットCSS
-//$resetCSS: HTML5;
+
+$ads-bottom : 100px;
 
 
-
-// 幅
-//$base_width: auto;
-//$max_width: 960px;
-//$min_width: 300px;
-//$main_width: 640px;
-//$side_width: 280px;
+// カラー
+$twitter-color : #55acee;
+$paint-btn-color : #000;
+$gototop-btn-color : #55acee;
+$sns-btn-color : #e1e8ed;
 
 // フォントカラー
 //$font_color: #555;
@@ -28,14 +26,6 @@
 
 //$base_color: #c69;
 //$sub_color: #7e9dd0;
-
-// 章カラー
-//$chapter_color: #c69, #7e9dd0, #c69, #7e9dd0, #c69, #7e9dd0, #c69, #7e9dd0;
-
-
-// 付与するベンダープレフィックス
-//$set_prefix: -webkit-, -moz-, -ms-, -o-, '';
-
 
 // ベースフォント
 //$base_font: "Source Code Pro", "メイリオ", "Meiryo", "ヒラギノ明朝 Pro W6", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", serif, verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;

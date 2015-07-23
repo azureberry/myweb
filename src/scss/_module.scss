@@ -7,15 +7,10 @@
   position: fixed;
   right: 20px;
 
-  @media(max-width:$screen-xs-min){
-    bottom: 120px;
+  @media(max-device-width:$screen-md-min){
+    bottom: $ads-bottom;
   }
 }
-
-$twitter-color : #55acee;
-$paint-btn-color : #000;
-$gototop-btn-color : #55acee;
-$sns-btn-color : #e1e8ed;
 
 .gototop-bg-btn {
   color: $gototop-btn-color;

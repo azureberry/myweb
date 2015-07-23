@@ -111,6 +111,7 @@ gulp.task 'sass', ->
     $.rubySass(config.path.sassroot,
       style: 'expanded'
       sourcemap: true
+      defaultEncoding: 'utf-8'
       )
     .on 'error', (e) -> throw e
     .pipe $.pleeease(
@@ -250,9 +251,8 @@ gulp.task 'deploy', ->
   .src(config.path.deploy,
       base: $WebContent
       buffer: false
-      since: $.util.env.ftpsrcsince
       )
-  .pipe conn.newer('/')
+  .pipe conn.differentSize('/')
   .pipe conn.dest('/')
 
 gulp.task 'json2yml', ->

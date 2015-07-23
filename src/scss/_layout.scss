@@ -10,8 +10,8 @@
   }
 }
 
-@media(max-width:$screen-xs-min){
+@media(max-device-width:$screen-md-min){
   .container {
-    margin-bottom: 100px;
+    margin-bottom: $ads-bottom;
   }
 }
