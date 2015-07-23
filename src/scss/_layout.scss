@@ -9,3 +9,9 @@
     width: auto;
   }
 }
+
+@media(max-width:$screen-xs-min){
+  .container {
+    margin-bottom: 100px;
+  }
+}

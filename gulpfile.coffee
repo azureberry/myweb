@@ -107,12 +107,6 @@ gulp.task 'sass-lint', ->
     .pipe $.if isJenkins, gulp.dest config.outpath.lint
 
 
-gulp.task "wiredep", ->
-  gulp
-    .src config.path.sass
-    .pipe wiredep()
-    .pipe gulp.dest $src + '/scss/'
-
 gulp.task 'sass', ->
     $.rubySass(config.path.sassroot,
       style: 'expanded'
@@ -128,6 +122,14 @@ gulp.task 'sass', ->
       includeContent: false
       )
     .pipe gulp.dest config.outpath.css
+
+
+gulp.task "wiredep", ->
+  gulp
+    .src config.path.sass
+    .pipe wiredep()
+    .pipe gulp.dest $src + '/scss/'
+
 
 gulp.task 'yml-lint', ->
   gulp
