@@ -249,7 +249,9 @@ gulp.task 'deploy', ->
   gulp
   .src(config.path.deploy,
       base: $WebContent
-      buffer: false)
+      buffer: false
+      since: $.util.env.ftpsrcsince
+      )
   .pipe conn.newer('/')
   .pipe conn.dest('/')
 
