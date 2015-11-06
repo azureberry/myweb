@@ -1,9 +1,12 @@
-sudo npm install -g gulp
-sudo npm install -g bower
-# sudo npm install -g jade
+# sudo npm install -g gulp
+# sudo npm install -g bower
+# # sudo npm install -g jade
+# # sudo apt install g++
+
+cp -a /vagrant/myweb .
+
 bundle install
-sudo apt install g++
-npm install  (--no-bin-links)
+sudo npm install  (--no-bin-links)
 bower install
 node node_modules/protractor/bin/webdriver-manager update
 
