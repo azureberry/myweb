@@ -1,7 +1,7 @@
-extends layout\_layout
+extends layout/_layout
 
 block prepend meta
-  include fragment\_meta_google-site-verification
+  include fragment/_meta_google-site-verification
 
 block title
   title= "Jumble Junk"
@@ -18,7 +18,7 @@ block sidenav_contents
 block maincontents
   h2 Jumble Junk
 
-  include fragment\_fc2_counter
+  include fragment/_fc2_counter
 
   p
     |｢jumble junk｣に来てくださってありがとうございます。ここは管理人・颯来(そら)の創作物(主にイラスト・小説など)を置いているサイトです。
@@ -33,12 +33,12 @@ block maincontents
     br
     |(since 2006/04/11)
 
-  include contents\_history_mini
+  include contents/_history_mini
 
   h3#submenu1 サイトマップ
-  include contents\_sitemap
+  include contents/_sitemap
 
 
   h3#submenu2 登録検索・ランキングサイト
   p
-    include fragment\_ranking
+    include fragment/_ranking
