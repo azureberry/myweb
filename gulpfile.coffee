@@ -199,9 +199,9 @@ gulp.task "bower", ['lib-clean'],->
 
   #bowerパッケージを種類ごとに結合圧縮して各フォルダに格納
   #各ファイル中にパスが記載されている場合は位置関係が崩れる可能性がある
-  cssFilter = $.filter '**/*.css'
-  jsFilter =  $.filter '**/*.js'
-  imgFilter = $.filter ['**/*.gif', '**/*.png','!**/*@2x.gif', '!**/*@2x.png']
+  cssFilter = $.filter '**/*.css', {restore: true}
+  jsFilter =  $.filter '**/*.js', {restore: true}
+  imgFilter = $.filter ['**/*.gif', '**/*.png','!**/*@2x.gif', '!**/*@2x.png'], {restore: true}
   fontFilter = $.filter [
                                '**/*.otf'
                                '**/*.eot'
@@ -209,7 +209,7 @@ gulp.task "bower", ['lib-clean'],->
                                '**/*.ttf'
                                '**/*.woff'
                                '**/*.woff2'
-                             ]
+                             ], {restore: true}
   gulp
     .src files
     .pipe $.if !isJenkins, $.plumber(ERROR_HANDLER)
@@ -218,22 +218,22 @@ gulp.task "bower", ['lib-clean'],->
     .pipe $.concat "vender.min.css"
     .pipe $.minifyCss()
     .pipe gulp.dest config.outpath.lib
-    .pipe cssFilter.restore()
+    .pipe cssFilter.restore
     #jsファイルの場合
    .pipe jsFilter
    .pipe $.concat "vender.min.js"
    .pipe $.uglify
        preserveComments: "some"
    .pipe gulp.dest config.outpath.lib
-   .pipe jsFilter.restore()
+   .pipe jsFilter.restore
     #画像ファイルの場合
     .pipe imgFilter
     .pipe gulp.dest config.outpath.lib
-    .pipe imgFilter.restore()
+    .pipe imgFilter.restore
     #フォントファイル
     .pipe fontFilter
     .pipe gulp.dest config.outpath.libfont
-    .pipe fontFilter.restore()
+    .pipe fontFilter.restore
     #その他ファイル
 #    .pipe gulp.dest config.outpath.lib
     return
