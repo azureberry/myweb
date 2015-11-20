@@ -10,7 +10,7 @@ exports.config =
   #   'spec/e2e/e2eSpec.cofee'
   # ]
 
-  chromeDriver: './node_modules/protractor/selenium/chromedriver'
+  # chromeDriver: './node_modules/protractor/selenium/chromedriver'
   directConnect: true
 
   capabilities:
