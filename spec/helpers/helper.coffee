@@ -1,4 +1,8 @@
 module.exports = {
+  clickObj : (myobj, sleepTime) ->
+    myobj.click()
+    browser.sleep(sleepTime)
+
   getScrollTop : ->
     browser.executeScript('return document.body.scrollTop;')
 

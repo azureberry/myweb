@@ -34,8 +34,7 @@ describe 'テスト（更新履歴）', ->
     expect(h.getScrollTop()).toEqual 0
 
     # サブメニューリンクをクリック
-    submenu_link_last.click()
-    browser.sleep(SLEEP_TIME)
+    h.clickObj(submenu_link_last, SLEEP_TIME)
 
     # クリック後のスクロール位置の確認
     submenu_link_last.$('a').getAttribute('href').then (submenu_link_url) ->
@@ -52,8 +51,7 @@ describe 'テスト（更新履歴）', ->
       init_locationdata_y = locationdata.y
 
     # スクロール
-    submenu_link_list.get(SCROLL_TEST_ITEM).click()
-    browser.sleep(SLEEP_TIME)
+    h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
 
     # スクロール後のサブメニューの位置が、スクロール量+初期locationであること
     h.getScrollTop().then (scrollTop) ->
@@ -65,21 +63,18 @@ describe 'テスト（更新履歴）', ->
     expect(h.hasClass(submenu_link_list.get(SCROLL_TEST_ITEM), 'active')).toBe(false)
 
     # スクロール
-    submenu_link_list.get(SCROLL_TEST_ITEM).click()
-    browser.sleep(SLEEP_TIME)
+    h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
 
     # スクロール後に、titleに一致した項目がactiveになっていること
     expect(h.hasClass(submenu_link_list.get(SCROLL_TEST_ITEM), 'active')).toBe(true)
 
   it 'トップへボタンで、ページ先頭に移動すること', ->
     # トップへボタンをクリック前に、スクロールする。初期位置がページ先頭でないこと
-    submenu_link_list.get(SCROLL_TEST_ITEM).click()
-    browser.sleep(SLEEP_TIME)
+    h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
     expect(h.getScrollTop()).toBeGreaterThan 0
 
     # トップへボタンをクリック
-    gototop_link.click()
-    browser.sleep(SLEEP_TIME)
+    h.clickObj(gototop_link, SLEEP_TIME)
 
     # ページ先頭に移動していること
     expect(h.getScrollTop()).toEqual 0
