@@ -2,7 +2,7 @@ SpecReporter = require('jasmine-spec-reporter')
 jasmineReporter = require('jasmine-reporters')
 
 exports.config =
-  #   seleniumServerJar:  './node_modules/protractor/selenium/selenium-server-standalone-2.45.0.jar'
+  # seleniumServerJar:  './node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar'
   # seleniumAddress: 'http://localhost:4444/wd/hub'
   # baseUrl: "http://localhost:9000"
 
@@ -11,6 +11,7 @@ exports.config =
   # ]
 
   chromeDriver: './node_modules/protractor/selenium/chromedriver'
+  directConnect: true
 
   capabilities:
     browserName: 'chrome'

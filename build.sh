@@ -13,6 +13,6 @@ node node_modules/protractor/bin/webdriver-manager update
 gulp build --jenkins
 gulp lint --jenkins
 
-gulp test --jenkins
+DISPLAY=:0 gulp test --jenkins
 
 
