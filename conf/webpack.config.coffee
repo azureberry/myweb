@@ -12,7 +12,7 @@ module.exports =
 
   output:
     filename: 'app.js'
-    sourceMapFilename: __dirname + '/../../sourcemap/[file].map'
+    sourceMapFilename: __dirname + '/../../../sourcemap/[file].map'
 
   # devtool: 'source-map'
 

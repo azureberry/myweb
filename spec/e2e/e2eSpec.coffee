@@ -54,8 +54,8 @@ describe 'テスト（更新履歴）', ->
     h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
 
     # スクロール後のサブメニューの位置が、スクロール量+初期locationであること
-    h.getScrollTop().then (scrollTop) ->
-      submenu.getLocation().then (locationdata) ->
+    submenu.getLocation().then (locationdata) ->
+      h.getScrollTop().then (scrollTop) ->
         expect(locationdata.y).toEqual scrollTop + init_locationdata_y
 
   it 'スクロールすると、scrollspyが動作すること', ->

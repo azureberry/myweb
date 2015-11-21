@@ -16,23 +16,24 @@ $src = './src'
 $WebContent = './WebContent'
 mySiteUrl = 'http://sora9.web.fc2.com/'
 configFileName = 'config'
+configDirName = '/conf'
 config =
               path:
-                 js: $src + '/coffee/**/*.coffee'
-                 jslintConfig: __dirname + '/coffeelint.json'
-                 sass: $src + '/scss/**/*.scss'
-                 sassroot: $src + '/scss/style.scss'
-                 sasslintConfig: __dirname + '/sasslint.yml'
-                 # sassSourceMap: '../../'+$src + '/scss'
-                 jade: $src + '/jade/**/*.jade'
-                 jadetask: $src + '/jade/**/!(_)*.jade'
-                 json: $src + '/json'
-                 jsondata: $src + '/json/'+configFileName+'.json'
-                 yml: $src + '/json/**/*.yml'
-                 img: $src + '/img/**/*'
-                 link : $src + '/link/**/*'
-                 webpack:  __dirname + '/webpack.config.coffee'
-                 deploy: $WebContent + '/**/*'
+                js: $src + '/coffee/**/*.coffee'
+                jslintConfig: __dirname + configDirName + '/coffeelint.json'
+                webpack:  __dirname + configDirName + '/webpack.config.coffee'
+                sass: $src + '/scss/**/*.scss'
+                sassroot: $src + '/scss/style.scss'
+                sasslintConfig: __dirname + configDirName + '/sasslint.yml'
+                # sassSourceMap: '../../'+$src + '/scss'
+                jade: $src + '/jade/**/*.jade'
+                jadetask: $src + '/jade/**/!(_)*.jade'
+                json: $src + '/json'
+                jsondata: $src + '/json/'+configFileName+'.json'
+                yml: $src + '/json/**/*.yml'
+                img: $src + '/img/**/*'
+                link : $src + '/link/**/*'
+                deploy: $WebContent + '/**/*'
               outpath:
                 js: $WebContent + '/js'
                 css: $WebContent + '/css'
@@ -42,11 +43,10 @@ config =
                 lib: $WebContent + '/lib'
                 libfont: $WebContent + '/lib/fonts'
                 sourcemap: __dirname + '/sourcemap'
-                # sourcemap: 'sourcemap'
                 lint:  __dirname + '/result/lint'
               test:
-                karma:  __dirname + '/karma.conf.coffee'
-                protractor:  __dirname + '/protractor.conf.coffee'
+                # karma:  __dirname + configDirName + '/karma.conf.coffee'
+                protractor:  __dirname + configDirName + '/protractor.conf.coffee'
                 spec: './spec/e2e/e2eSpec.coffee'
                 host: 'localhost'
                 port: 8888
@@ -123,13 +123,6 @@ gulp.task 'sass', ->
       includeContent: false
       )
     .pipe gulp.dest config.outpath.css
-
-
-gulp.task "wiredep", ->
-  gulp
-    .src config.path.sass
-    .pipe wiredep()
-    .pipe gulp.dest $src + '/scss/'
 
 
 gulp.task 'yml-lint', ->
@@ -255,12 +248,22 @@ gulp.task 'deploy', ->
   .pipe conn.differentSize('/')
   .pipe conn.dest('/')
 
-gulp.task 'json2yml', ->
-  gulp.src config.path.jsondata
-   .pipe $.convert(
-      from: 'json',
-      to: 'yml')
-   .pipe gulp.dest $src + '/json'
+######################
+
+gulp.task "wiredep", ->
+  gulp
+    .src config.path.sass
+    .pipe wiredep()
+    .pipe gulp.dest $src + '/scss/'
+
+
+# gulp.task 'json2yml', ->
+#   gulp.src config.path.jsondata
+#    .pipe $.convert(
+#       from: 'json',
+#       to: 'yml')
+#    .pipe gulp.dest $src + '/json'
+######################
 
 gulp.task 'default', ['browser', 'watch']
 
@@ -288,8 +291,9 @@ gulp.task 'lint', ['sass-lint', 'js-lint']
 ###
   test
 ###
-gulp.task 'karma', ->
-  karma.start {configFile: config.test.karma}
+
+# gulp.task 'karma', ->
+#   karma.start {configFile: config.test.karma}
 
 gulp.task 'webserver-start', ->
   gulp.src('./WebContent')
