@@ -8,7 +8,7 @@ browserSync = require 'browser-sync'
 ftp = require 'vinyl-ftp'
 webpack = require 'webpack-stream'
 
-karma = require('karma').server
+# karma = require('karma').server
 
 
 #path
@@ -47,7 +47,7 @@ config =
               test:
                 # karma:  __dirname + configDirName + '/karma.conf.coffee'
                 protractor:  __dirname + configDirName + '/protractor.conf.coffee'
-                spec: './spec/e2e/e2eSpec.coffee'
+                spec: './spec/e2e/**/*Spec.coffee'
                 host: 'localhost'
                 port: 8888
 
@@ -286,7 +286,7 @@ gulp.task 'build', -> runSequence(
   'jade'
 )
 
-gulp.task 'lint', ['sass-lint', 'js-lint']
+gulp.task 'lint', ['sass-lint', 'js-lint', 'yml-lint']
 
 ###
   test
