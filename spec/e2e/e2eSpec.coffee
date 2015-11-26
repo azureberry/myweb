@@ -36,10 +36,9 @@ describe 'テスト（更新履歴）', ->
     # サブメニューリンクをクリック
     h.clickObj(submenu_link_last, SLEEP_TIME)
 
-    # クリック後のスクロール位置の確認
+    # クリック後のスクロール位置が、リンク先の場所+ヘッダーの高さであること
     submenu_link_last.$('a').getAttribute('href').then (submenu_link_url) ->
-      submenu_link_id = h.getLinkId(submenu_link_url)
-      $(submenu_link_id).getLocation().then (locationdata) ->
+      $(h.getLinkId(submenu_link_url)).getLocation().then (locationdata) ->
         mainrow.getCssValue('padding-top').then (headerH) ->
           expect(h.getScrollTop()).toEqual locationdata.y - parseInt(headerH, 10)
 

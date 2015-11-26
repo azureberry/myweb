@@ -3,8 +3,7 @@ webpack = require('webpack')
 
 module.exports =
   resolve:
-    root: [ path.join(__dirname, 'bower_components') ]
-    # requireやimport時の拡張子を省略
+    # root: [ path.join(__dirname, 'bower_components') ]
     extensions: ['', '.js', '.jsx', '.coffee', '.css', '.styl']
 
   # entry:
@@ -23,6 +22,6 @@ module.exports =
           } ]
 
   plugins:[
-    new (webpack.ResolverPlugin)(
-        new (webpack.ResolverPlugin.DirectoryDescriptionFilePlugin)('bower.json', [ 'main' ]))
+    # new (webpack.ResolverPlugin)(
+    #     new (webpack.ResolverPlugin.DirectoryDescriptionFilePlugin)('bower.json', [ 'main' ]))
   ]
