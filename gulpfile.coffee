@@ -10,7 +10,11 @@ config = require './gulp/config'
 
 gulp.task 'default', ['browser', 'watch']
 
-gulp.task 'lint', ['sass-lint', 'js-lint', 'yml-lint']
+gulp.task 'lint', ->  runSequence(
+    'sass-lint'
+    ['js-lint'
+    'yml-lint'
+    ])
 
 gulp.task 'build', -> runSequence(
   'bower',
