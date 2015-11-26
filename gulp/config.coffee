@@ -37,7 +37,7 @@ module.exports =
         lib: $WebContent + '/lib'
         libfont: $WebContent + '/lib/fonts'
         sourcemap: __dirname + '/../sourcemap'
-        lint:  __dirname + '/../result/lint'
+        lint:  './result/lint'
     test:
         # karma:  __dirname + configDirName + '/karma.conf.coffee'
         protractor:  __dirname + configDirName + '/protractor.conf.coffee'
