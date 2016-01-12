@@ -7,7 +7,7 @@ myweb
 You'll need to have the following items installed before continuing.
 
   * [Ruby](https://www.ruby-lang.org/ja/)
-  * [Node.js](http://nodejs.org):
+  * [Node.js](http://nodejs.org)
 
   * [Git for windows](http://msysgit.github.io/)
   * [Bower](http://bower.io) `npm install -g bower`
