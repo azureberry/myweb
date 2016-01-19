@@ -6,9 +6,10 @@ configDirName = '/../conf'
 configFileName = 'config'
 
 module.exports =
-    $src:  './src'
-    $WebContent:  './WebContent'
+    # $src:  './src'
+    $WebContent:  $WebContent
     mySiteUrl : 'http://sora9.web.fc2.com/'
+    configFileName : 'config'
 
 
     # config =
