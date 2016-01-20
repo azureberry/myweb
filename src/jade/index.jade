@@ -7,18 +7,10 @@ block title
   title= "Jumble Junk"
 
 block carousel_indicators
-  li(data-target="#myCarousel" data-slide-to="0").active
-  li(data-target="#myCarousel" data-slide-to="1")
-  li(data-target="#myCarousel" data-slide-to="2")
+  +top_carousel_indicators(3)
 
 block carousel_items
-  div.item.active
-    img(src='http://placehold.it/1900x580&text=Slide One')
-  div.item
-    img(src='http://placehold.it/1900x580&text=Slide Two')
-  div.item
-    img(src='http://placehold.it/1900x580&text=Slide Three')
-
+  +top_carousel_items({'http://placehold.it/1900x580&text=Slide One', 'http://placehold.it/1900x580&text=Slide Two', 'http://placehold.it/1900x580&text=Slide Three'})
 
 
 block maincontents1
