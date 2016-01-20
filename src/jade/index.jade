@@ -7,10 +7,10 @@ block title
   title= "Jumble Junk"
 
 block carousel_indicators
-  +top_carousel_indicators(3)
+  +top_carousel_indicators(top_carousel_items_url.length)
 
 block carousel_items
-  +top_carousel_items({'http://placehold.it/1900x580&text=Slide One', 'http://placehold.it/1900x580&text=Slide Two', 'http://placehold.it/1900x580&text=Slide Three'})
+  +top_carousel_items(top_carousel_items_url)
 
 
 block maincontents1
