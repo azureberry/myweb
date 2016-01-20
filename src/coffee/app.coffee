@@ -28,12 +28,17 @@ onReady = ->
 
   #ページ内リンク
   headerH = parseInt($('.main-row').css('padding-top'), 10)
-  $('a[href^=#]').bind 'click', ->
+  $('a[href^=#]:not([href^=#myCarousel])').bind 'click', ->
     href = $(this).attr('href')
     target = $(if href == '#' or href == '' then 'html' else href)
     position = target.offset().top - headerH
     $('html, body').animate {scrollTop : position}, 200, 'swing'
     false
+
+  #carousel
+  # $('.carousel').carousel({
+  #       interval: 5000
+  #   })
 
   # lightbox prettyPhoto
   $('.fancybox').fancybox(

@@ -1,4 +1,4 @@
-extends layout/_layout
+extends layout/_layout_index
 
 block prepend meta
   include fragment/_meta_google-site-verification
@@ -6,39 +6,57 @@ block prepend meta
 block title
   title= "Jumble Junk"
 
-block breadcrumb
+block carousel_indicators
+  li(data-target="#myCarousel" data-slide-to="0").active
+  li(data-target="#myCarousel" data-slide-to="1")
+  li(data-target="#myCarousel" data-slide-to="2")
+
+block carousel_items
+  div.item.active
+    img(src='http://placehold.it/1900x580&text=Slide One')
+  div.item
+    img(src='http://placehold.it/1900x580&text=Slide Two')
+  div.item
+    img(src='http://placehold.it/1900x580&text=Slide Three')
 
 
-block sidenav_contents
-  +submenuitem([
-              "最近の更新",
-              "サイトマップ",
-              "登録検索・ランキングサイト"])
 
-block maincontents
-  h2 Jumble Junk
+block maincontents1
+  //- h2 Jumble Junk
+  div.panel.panel-default
+    div.panel-body
+      include fragment/_fc2_counter
+      p
+        |｢jumble junk｣に来てくださってありがとうございます。ここは管理人・颯来(そら)の創作物(主にイラスト・小説など)を置いているサイトです。
+        br
+        |版権物については各企業、作者様とは何も関係ありません。
+        br
+        |このサイト内のものは、無断転載・二次配布禁止です。
+        br
+        |このサイトへのリンクはフリーです。詳しいことやバナーなどは<a href="link.html">こちら(リンク)</a>にあります。
+        br
+        |では、ごゆっくり。みなさんが楽しんでもらえると嬉しいです。
+        br
+        |(since 2006/04/11)
 
-  include fragment/_fc2_counter
+      include contents/_history_mini
 
-  p
-    |｢jumble junk｣に来てくださってありがとうございます。ここは管理人・颯来(そら)の創作物(主にイラスト・小説など)を置いているサイトです。
-    br
-    |版権物については各企業、作者様とは何も関係ありません。
-    br
-    |このサイト内のものは、無断転載・二次配布禁止です。
-    br
-    |このサイトへのリンクはフリーです。詳しいことやバナーなどは<a href="link.html">こちら(リンク)</a>にあります。
-    br
-    |では、ごゆっくり。みなさんが楽しんでもらえると嬉しいです。
-    br
-    |(since 2006/04/11)
+block maincontents2
+  div.panel.panel-default
+    div.panel-heading サイトマップ
+    div.panel-body
+      include contents/_sitemap
 
-  include contents/_history_mini
+block maincontents3
+  div.panel.panel-default
+    div.panel-heading SNS
+    div.panel-body
+      p
+        include ./contents/_sns
 
-  h3#submenu1 サイトマップ
-  include contents/_sitemap
+  div.panel.panel-default
+    div.panel-heading 登録検索・ランキングサイト
+    div.panel-body
+      p
+        include fragment/_ranking
 
-
-  h3#submenu2 登録検索・ランキングサイト
-  p
-    include fragment/_ranking
