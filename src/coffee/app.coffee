@@ -3,12 +3,12 @@ onReady = ->
 
   #go to TOP
   pageTop = $('.gototop')
-  # pageTop.hide()
-  # $(window).scroll ->
-  #     if $(this).scrollTop() > 600
-  #       pageTop.fadeIn()
-  #     else
-  #       pageTop.fadeOut()
+  pageTop.hide()
+  $(window).scroll ->
+      if $(this).scrollTop() > $(window).height()/2
+        pageTop.fadeIn()
+      else
+        pageTop.fadeOut()
   pageTop.bind 'click', ->
     $('body, html').animate {scrollTop : 0}, 200, 'swing'
     false
