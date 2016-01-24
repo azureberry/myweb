@@ -70,7 +70,7 @@ describe 'テスト（共通）', ->
     submenu.getLocation().then (locationdata) ->
       init_locationdata_y = locationdata.y
 
-    # スクロール
+    # スクロール(リンククリック)
     h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
 
     # スクロール後のサブメニューの位置が、スクロール量+初期locationであること
@@ -82,7 +82,7 @@ describe 'テスト（共通）', ->
     # 初期はactive状態ではないこと
     expect(h.hasClass(submenu_link_list.get(SCROLL_TEST_ITEM), 'active')).toBe(false)
 
-    # スクロール
+    # スクロール（リンククリック）
     h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
 
     # スクロール後に、titleに一致した項目がactiveになっていること
