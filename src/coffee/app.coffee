@@ -40,7 +40,7 @@ onReady = ->
   #       interval: 5000
   #   })
 
-  # lightbox prettyPhoto
+  # lightbox
   $('.fancybox').fancybox(
     helpers :
       title :
