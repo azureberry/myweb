@@ -6,20 +6,16 @@ block prepend meta
 block title
   title= "Jumble Junk"
 
-block carousel_indicators
-  +top_carousel_indicators(top_carousel_items_url.length)
 
 block carousel_items
-  +top_carousel_items(top_carousel_items_url)
+  +mycarousel_items("#myCarousel", top_carousel_items_url)
 
 
 block maincontents1
-  //- h2 Jumble Junk
   div.panel.panel-default
     div.panel-body
       include fragment/_fc2_counter
-      p
-        include contents/_top_comment
+      include contents/_top_comment
 
       include contents/_history_mini
 

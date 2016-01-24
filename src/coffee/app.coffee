@@ -13,6 +13,15 @@ onReady = ->
     $('body, html').animate {scrollTop : 0}, 200, 'swing'
     false
 
+  #ページ内リンク
+  headerH = parseInt($('.main-row').css('padding-top'), 10)
+  $('a[href^=#]:not([href^=#myCarousel])').bind 'click', ->
+    href = $(this).attr('href')
+    target = $(if href == '#' or href == '' then 'html' else href)
+    position = target.offset().top - headerH
+    $('html, body').animate {scrollTop : position}, 200, 'swing'
+    false
+
   #affix
   $affix = $('.side-nav')
   # $affix.affix
@@ -25,15 +34,6 @@ onReady = ->
   # $('body').scrollspy
   #   target: '.submenulist'
   #   offset: '85'
-
-  #ページ内リンク
-  headerH = parseInt($('.main-row').css('padding-top'), 10)
-  $('a[href^=#]:not([href^=#myCarousel])').bind 'click', ->
-    href = $(this).attr('href')
-    target = $(if href == '#' or href == '' then 'html' else href)
-    position = target.offset().top - headerH
-    $('html, body').animate {scrollTop : position}, 200, 'swing'
-    false
 
   #carousel
   # $('.carousel').carousel({

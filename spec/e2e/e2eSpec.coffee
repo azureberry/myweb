@@ -1,7 +1,6 @@
 h = require('../helpers/helper')
 
-describe 'テスト（更新履歴）', ->
-
+describe 'テスト（共通）', ->
   submenu_link_list = $$('.submenulist li')
   submenu_link_last = submenu_link_list.last()
   submenu = $('.submenulist')
@@ -20,6 +19,28 @@ describe 'テスト（更新履歴）', ->
     browser.ignoreSynchronization = true
     browser.get browser.baseUrl+'/history.html'
     return
+
+
+  it 'トップへボタンが、スクロール後に表示されること', ->
+    # 初期位置で、トップへボタンが非表示であること
+    expect(gototop_link.isDisplayed()).toBeFalsy()
+
+    # スクロール
+    browser.executeScript('window.scrollTo(0, INIT_WINDOW_HEIGHT/2 + 1);').then ->
+
+    # トップへボタンが表示されること
+      expect(gototop_link.isDisplayed()).toBeTruthy()
+
+  it 'トップへボタンで、ページ先頭に移動すること', ->
+    # トップへボタンをクリック前に、スクロールする。初期位置がページ先頭でないこと
+    h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
+    expect(h.getScrollTop()).toBeGreaterThan 0
+
+    # トップへボタンをクリック
+    h.clickObj(gototop_link, SLEEP_TIME)
+
+    # ページ先頭に移動していること
+    expect(h.getScrollTop()).toEqual 0
 
 
   it 'サブメニューの最後の要素は「2006年」', ->
@@ -43,7 +64,7 @@ describe 'テスト（更新履歴）', ->
           expect(h.getScrollTop()).toEqual locationdata.y - parseInt(headerH, 10)
 
 
-  it 'スクロールすると、サブメニューが合わせて移動すること', ->
+  it 'スクロールすると、サブメニューが合わせて移動すること[affix]', ->
     # サブメニューの初期location取得
     init_locationdata_y = 0
     submenu.getLocation().then (locationdata) ->
@@ -67,13 +88,4 @@ describe 'テスト（更新履歴）', ->
     # スクロール後に、titleに一致した項目がactiveになっていること
     expect(h.hasClass(submenu_link_list.get(SCROLL_TEST_ITEM), 'active')).toBe(true)
 
-  it 'トップへボタンで、ページ先頭に移動すること', ->
-    # トップへボタンをクリック前に、スクロールする。初期位置がページ先頭でないこと
-    h.clickObj(submenu_link_list.get(SCROLL_TEST_ITEM), SLEEP_TIME)
-    expect(h.getScrollTop()).toBeGreaterThan 0
 
-    # トップへボタンをクリック
-    h.clickObj(gototop_link, SLEEP_TIME)
-
-    # ページ先頭に移動していること
-    expect(h.getScrollTop()).toEqual 0

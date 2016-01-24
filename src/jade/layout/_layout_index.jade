@@ -39,11 +39,7 @@ html
       div.row.main-row
         //Header Carousel
         div#myCarousel.carousel.slide(data-ride="carousel")
-          ol.carousel-indicators
-            block carousel_indicators
-
-          div.carousel-inner(role="listbox")
-            block carousel_items
+          block carousel_items
 
           a.left.carousel-control(href="#myCarousel" role="button" data-slide="prev")
             span.icon-prev(aria-hidden="true")

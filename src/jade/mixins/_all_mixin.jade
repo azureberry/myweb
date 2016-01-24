@@ -2,21 +2,23 @@ mixin submenuitem(contents)
   each val, index in contents
     li: a(href="#submenu#{index}") #{val}
 
-mixin top_carousel_indicators(num)
-  - for (var x = 0; x < num; x++)
-    if x==0
-      li(data-target="#myCarousel" data-slide-to="#{x}").active
-    else
-      li(data-target="#myCarousel" data-slide-to="#{x}")
 
-mixin top_carousel_items(contents)
-  each val, index in contents
-    if index==0
-      div.item.active
-        img(src='#{val}').img-responsive.center-block
-    else
-      div.item
-        img(src='#{val}').img-responsive.center-block
+mixin mycarousel_items(targetid, contents)
+  ol.carousel-indicators
+    - for (var x = 0; x < contents.legth; x++)
+      if x==0
+        li(data-target="#{targetid}" data-slide-to="#{x}").active
+      else
+        li(data-target="#{targetid}" data-slide-to="#{x}")
+
+  div.carousel-inner(role="listbox")
+    each val, index in contents
+      if index==0
+        div.item.active
+          img(src='#{val}').img-responsive.center-block
+      else
+        div.item
+          img(src='#{val}').img-responsive.center-block
 
 
 mixin illust_galleries(contents,g_id, imgfolder)
