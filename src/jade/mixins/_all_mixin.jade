@@ -14,10 +14,10 @@ mixin mycarousel_items(targetid, contents)
   div.carousel-inner(role="listbox")
     each val, index in contents
       if index==0
-        div.item.mycarousel_item(style="background-image:url('#{val}');").active
+        div.item.mycarousel-item(style="background-image:url('#{val}');").active
           //- img(src='#{val}').img-responsive.center-block
       else
-        div.item.mycarousel_item(style="background-image:url('#{val}');")
+        div.item.mycarousel-item(style="background-image:url('#{val}');")
           //- img(src='#{val}').img-responsive.center-block
 
 
