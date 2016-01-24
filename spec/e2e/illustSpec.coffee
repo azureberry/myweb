@@ -1,6 +1,6 @@
 h = require('../helpers/helper')
 
-describe 'テスト（イラスト）', ->
+describe 'テスト（illust）', ->
   lightbox_parent_item = $('html')
   gallery_item_first = $$('.gallery li').first()
 

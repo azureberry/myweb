@@ -1,6 +1,6 @@
 h = require('../helpers/helper')
 
-describe 'テスト（共通）', ->
+describe 'テスト（common）', ->
   submenu_link_list = $$('.submenulist li')
   submenu_link_last = submenu_link_list.last()
   submenu = $('.submenulist')
