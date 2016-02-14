@@ -2,7 +2,18 @@
 // ===================================================================
 // 設定
 // ===================================================================
+// Glyphicons font path
+$icon-font-path:  '../lib/fonts';
 
+// Font Awesome font path
+$fa-font-path:  '../lib/fonts';
+
+$dl-horizontal-offset: 80px;
+
+// ベースフォント
+$base-font: "Source Code Pro", "メイリオ", "Meiryo", "ヒラギノ明朝 Pro W6", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", serif, verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
+$font-family-base: 'M+ C Type-1 (basic latin) Regular', 'M+ Type-1 (general-j) Regular', $base-font;
+$headings-font-family: 'M+ C Type-1 (basic latin) Bold', 'M+ Type-1 (general-j) Bold';
 
 $ads-bottom : 100px;
 
@@ -16,19 +27,5 @@ $paint-btn-color : #000;
 $gototop-btn-color : #55acee;
 $sns-btn-color : #e1e8ed;
 
-// フォントカラー
-//$font_color: #555;
-//$title_color: #232323;
-
-// リンクカラー
-//$link_color: #4775f5;
-//$link_color_visited: #333;
-//$link_color_hover: #4775f5 + #222;
-//$link_color_active: #000;
 
 
-//$base_color: #c69;
-//$sub_color: #7e9dd0;
-
-// ベースフォント
-//$base_font: "Source Code Pro", "メイリオ", "Meiryo", "ヒラギノ明朝 Pro W6", "Hiragino Mincho Pro", "HGS明朝E", "ＭＳ Ｐ明朝", serif, verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
