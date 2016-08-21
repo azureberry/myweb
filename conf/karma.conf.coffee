@@ -94,12 +94,12 @@ module.exports = (config) ->
     plugins: [
       ##frameworks
       'karma-jasmine'
-      'karma-jasmine-jquery'
-      'karma-bower'
-      'karma-mocha'
-      'karma-mocha-debug'
-      'karma-chai'
-      'karma-e2e-dsl'
+      # 'karma-jasmine-jquery'
+      # 'karma-bower'
+      # 'karma-mocha'
+      # 'karma-mocha-debug'
+      # 'karma-chai'
+      # 'karma-e2e-dsl'
 
       ##preprocessor
       'karma-webpack'
