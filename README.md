@@ -8,6 +8,9 @@ You'll need to have the following items installed before continuing.
 
   * [Ruby](https://www.ruby-lang.org/ja/)
   * [Node.js](http://nodejs.org)
+  * [node-gyp](https://github.com/nodejs/node-gyp#installation)
+  `npm install --global --production windows-build-tools`
+
 
   * [Git for windows](http://msysgit.github.io/)
   * [Bower](http://bower.io) `npm install -g bower`

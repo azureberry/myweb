@@ -15,7 +15,7 @@ onReady = ->
 
   #ページ内リンク
   headerH = parseInt($('.main-row').css('padding-top'), 10)
-  $('a[href^=#]:not([href^=#myCarousel])').bind 'click', ->
+  $('a[href^="#"]:not([href^="#myCarousel"])').bind 'click', ->
     href = $(this).attr('href')
     target = $(if href == '#' or href == '' then 'html' else href)
     position = target.offset().top - headerH
